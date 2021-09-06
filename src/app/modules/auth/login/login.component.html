@@ -1,0 +1,42 @@
+<mat-drawer-container fxFlex fxLayout="row" fxLayoutAlign="start start">
+    <mat-drawer-content class="login-content-panel" fxFlex fxHide fxShow.gt-xs>
+        <!-- <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/fuse.svg">
+        </div> -->
+
+        <!-- <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            ยินดีต้อนรับเข้าสู่ระบบ ธรรมธุรกิจ หลังบ้าน
+        </div>
+
+        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            ธรรมธุรกิจ หลังบ้าน คือ
+            ระบบบริหารจัดการทรัพยากรทั้งหมดขององค์กรแบบเต็มรูปแบบ ตั่งแต่การสร้างลูกค้าใหม่ บริหารงานขาย วางแผนผลิต จัดการคลังสินค้าและวัตถุดิบ 
+            กระบวนการผลิต จนถึงส่งมอบสินค้าและบริการถึงมือลูกค้า และบริการหลังการขาย 
+        </div> -->
+    </mat-drawer-content>
+    <mat-drawer class="login-right-panel" mode="side" opened="true" position="end">
+
+        <form class="content" (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="form">
+            <h1>เข้าสู่ระบบหลังบ้าน</h1>
+            <div *ngFor="let control of formBase">
+                <app-formbase [form]="form" [control]="control"></app-formbase>
+                <!-- Insert this code to track events. => (change)="control.key=='companyCode' && test($event.target.value)" -->
+            </div>
+
+            <div>
+                &nbsp;&nbsp;
+            </div>
+
+            <div fxLayoutAlign="center end">
+                <button fxFlex="80" mat-raised-button color="primary" type="submit"
+                    [disabled]="!form?.valid">เข้าสู่ระบบ</button>
+            </div>
+        </form>
+
+        <!-- <div class="register" fxLayout="column" fxLayoutAlign="center center">
+            <span class="text">ยังไม่มีบัญชีผู้ใช้งานระบบใช่ไหม?</span>
+            <a class="link" [routerLink]="'/auth/register'">ลงทะเบียนผู้ใช้ใหม่</a>
+        </div> -->
+    </mat-drawer>
+
+</mat-drawer-container>

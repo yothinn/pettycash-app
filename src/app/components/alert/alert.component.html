@@ -1,0 +1,40 @@
+<div fxLayout="row" fxFlex fxLayoutGap="2em" *ngIf="!this.data?.type || this.data?.type=== 'success' ">
+    <div fxflex="20" fxLayoutAlign="center center">
+        <mat-icon class="icon-message">
+            check_circle
+        </mat-icon>
+    </div>
+    <div fxFlex="80" fxLayout="column" fxLayoutGap="0.5em">
+        <span class="header-content">
+            <h4>
+                {{ this.data?.header ? this.data?.header : "Completed" }}
+            </h4>
+        </span>
+        <span class="message-content">
+            {{this.data.message}}
+        </span>
+    </div>
+</div>
+
+<div fxLayout="row" fxFlex fxLayoutGap="2em" *ngIf="this.data?.type=== 'error' ">
+    <div fxflex="20" fxLayoutAlign="center center">
+        <mat-icon class="icon-message">
+            error
+        </mat-icon>
+    </div>
+    <div fxFlex="70" fxLayout="column" fxLayoutGap="0.5em">
+        <span class="header-content">
+            <h4>
+                {{ this.data?.header ? this.data?.header : "Error" }}
+            </h4>
+        </span>
+        <span class="message-content">
+            {{this.data.message}}
+        </span>
+    </div>
+    <div fxFlex="10" fxLayoutAlign="center center">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

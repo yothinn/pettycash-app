@@ -1,0 +1,176 @@
+<form [formGroup]="customer" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start" class="content"
+    *ngIf="!order && customer">
+    <h1>"สั่งซื้อสินค้า"</h1>
+    <h4>ข้อมูลผู้ซื้อ</h4>
+
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>คำนำหน้า</mat-label>
+        <input matInput formControlName="title" required>
+        <mat-error *ngIf="customer.get('title').hasError('required')">
+            กรุณาระบุ คำนำหน้า
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>ชื่อ</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="customer.get('firstName').hasError('required')">
+            กรุณาระบุ ชื่อ
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>นามสกุล</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="customer.get('lastName').hasError('required')">
+            กรุณาระบุ นามสกุล
+        </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>เบอร์มือถือ</mat-label>
+        <input matInput maxlength="10" formControlName="tel" required>
+        <mat-error *ngIf="customer.get('tel').hasError('required')">
+            กรุณาระบุ เบอร์มือถือ
+        </mat-error>
+        <mat-error *ngIf="customer.get('tel').dirty">
+            เบอร์มือถือไม่ถูกต้อง
+        </mat-error>
+    </mat-form-field>
+
+
+    <h4>ที่อยู่</h4>
+
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>รหัสไปรษณีย์</mat-label>
+        <input matInput maxlength="5" (keyup)="updateFilter($event)" [matAutocomplete]="auto" formControlName="zip" />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getPosts($event.option)">
+            <mat-option *ngFor="let postcode of postcodesList.slice(0, 10)" [value]="postcode.postcode">
+                <span>{{ postcode.postcode }}</span> |
+                <small>{{ postcode.subdistrict }}</small> |
+                <small>{{ postcode.district }}</small> |
+                <small>{{ postcode.province }}</small>
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="customer.get('zip')dirty">
+            รหัสไปรษณีย์ไม่ถูกต้อง
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>จังหวัด</mat-label>
+        <input matInput formControlName="province" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>อำเภอ/เขต</mat-label>
+        <input matInput formControlName="district" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>ตำบล/แขวง</mat-label>
+        <input matInput formControlName="subDistrict" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>ถนน</mat-label>
+        <input matInput formControlName="street" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+        <mat-label>บ้านเลขที่/หมู่บ้าน/ซอย</mat-label>
+        <input matInput formControlName="addr01" />
+    </mat-form-field>
+
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" fxFlex="50" type="submit"
+            [disabled]="(!customer.valid)">ส่งข้อมูล</button>
+
+    </div>
+</form>
+
+<div class="content" fxLayout="column" fxLayoutAlign="center" class="content" *ngIf="order && !isCompleted">
+    <h1>"สั่งซื้อสินค้า"</h1>
+    <div>
+        <mat-card>
+
+            <p>ชื่อผู้สั่งซื้อ: {{contact?.firstName}} {{contact?.lastName}}</p>
+            <mat-card-subtitle>เบอร์มือถือ: {{contact?.tel}}</mat-card-subtitle>
+        </mat-card>
+    </div>
+    <div style="margin-top: 10px;">
+        <mat-card>
+
+            <p>ชื่อผู้รับ: {{contact?.firstName}} {{contact?.lastName}}</p>
+            <mat-card-subtitle>เบอร์มือถือ: {{contact?.tel}}</mat-card-subtitle>
+            <mat-card-subtitle>ที่อยู่:
+                <span>{{contact?.addr01 || '-'}} {{contact?.street ? 'ถ.'+contact?.street: ''}}</span>
+                <span>{{contact?.subDistrict}} {{contact?.district}} {{contact?.province}}</span>
+                <span>{{contact?.zip}}</span>
+            </mat-card-subtitle>
+
+        </mat-card>
+    </div>
+    <div style="margin-top: 10px;">
+        <mat-toolbar color="primary">
+            <span>รายการสินค้า</span>
+        </mat-toolbar>
+        <div fxLayout="column" *ngFor="let item of order.items; let i = index;" style="padding: 5px;">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="10">{{i + 1}}</div>
+                <div fxFlex="60">{{item.productName}}</div>
+                <div fxFlex="30" fxLayoutAlign="center center">
+                    <div fxLayoutAlign="end" fxFlex="30">
+                        <button mat-icon-button color="accent" type="button" (click)="onRemove(item)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                    <div fxLayoutAlign="center" fxFlex="40">
+                        {{item.qty | number}}
+                    </div>
+                    <div fxLayoutAlign="start" fxFlex="30">
+                        <button mat-icon-button color="primary" type="button" (click)="onAdd(item)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <mat-card>
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div fxFlex="60">รวมราคาสินค้า</div>
+                    <div fxFlex="40" fxLayoutAlign="end">{{order.totalAmount | number:'1.2'}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div fxFlex="60">ค่าขนส่ง</div>
+                    <div fxFlex="40" fxLayoutAlign="end">{{order.shipAmount | number:'1.2'}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div fxFlex="60">รวมเป็นเงินทั้งสิ้น</div>
+                    <div fxFlex="40" fxLayoutAlign="end">{{order.netAmount | number:'1.2'}}</div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div style="margin-top: 10px;">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button color="accent" fxFlex="40">ยกเลิก</button>
+            <div fxFlex="20"></div>
+            <button mat-raised-button color="primary" fxFlex="40">ยืนยัน</button>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="content" fxLayout="column" fxLayoutAlign="center center" class="content" *ngIf="isCompleted">
+
+    <div class="mat-icon-larger">
+        <mat-icon class="mat-icon-larger" color="primary">task_alt</mat-icon>
+    </div>
+
+
+    <p>ระบบได้ทำการบันทึกข้อมูลเรียบร้อยแล้ว</p>
+    <p style="color: red;">***ชำระเงินค่าหุ้น ด้วย QRCode ที่ระบบส่งให้ทางไลน์ส่วนตัว***</p>
+
+</div>

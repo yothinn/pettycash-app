@@ -1,0 +1,73 @@
+<div [formGroup]="form" fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+
+  <div [ngSwitch]="control.controlType" fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+
+    <mat-form-field *ngSwitchCase="'textbox'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <input matInput [id]="control.key" [type]="control.type" [formControlName]="control.key">
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'textarea'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <textarea matInput [id]="control.key" [type]="control.type" [formControlName]="control.key"></textarea>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'dropdown'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <mat-select [id]="control.key" [formControlName]="control.key">
+        <mat-option *ngFor="let opt of control.options" [value]="opt.key">
+          {{opt.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'lookup'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <mat-select [id]="control.key" [formControlName]="control.key">
+        <mat-option *ngFor="let opt of control.options" [value]="opt._id">
+          {{opt.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'autocomplete'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <input matInput [id]="control.key" [type]="control.type" [formControlName]="control.key" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getDisplayFn()">
+        <mat-option *ngFor="let opt of filteredOptions" [value]="opt">
+          {{opt.name}}
+        </mat-option>
+
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="'multiselect'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <mat-select [id]="control.key" [formControlName]="control.key" multiple>
+        <mat-option *ngFor="let opt of control.options" [value]="opt.key">
+          {{opt.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+    <mat-form-field *ngSwitchCase="'datepicker'" appearance="standard" fxFlexFill>
+      <mat-label>{{control.label}}</mat-label>
+      <input matInput [matDatepicker]="picker" [formControlName]="control.key">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker ></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngSwitchCase="'checkbox'" class="chkbox-from-field" fxFlex>
+      <!-- <mat-label class="label">{{control.label}}</mat-label> -->
+      <mat-slide-toggle fxLayout="row" fxFlex="50" fxLayoutAlign="end center" [id]="control.key"
+        [formControlName]="control.key" [color]="primary" [checked]="control.value">
+        {{control.label}}
+      </mat-slide-toggle>
+    </div>
+
+
+
+  </div>
+</div>

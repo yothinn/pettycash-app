@@ -1,0 +1,53 @@
+@import "~@angular/material/theming";
+@import 'src/styles.scss';
+
+$nav-font-color : rgb(124, 121, 121);
+.contact-container {
+  width: 100%;
+  height: calc(100vh - 70px);
+  // border: 1px solid black;
+
+  .contact-left-panel {
+    width: 15%;
+    // border: 1px solid red;
+    overflow: hidden !important;
+    // height: calc(100vh - 65px);
+
+    .mat-list-option {
+      color: $nav-font-color;
+
+      .mat-icon {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-right: 10px;
+      }
+
+    }
+
+    .mat-list-single-selected-option {
+      color: mat-color($ng-app-primary);
+    }
+
+  }
+
+  .contact-content-panel {
+    overflow: auto;
+    width: 85%;
+    padding-left: 10px;
+    padding-right: 10px;
+    // background-color: #fff;
+    // border: 1px solid black;
+
+
+    // .mat-toolbar-header {
+    //   position: sticky;
+    //   top: 0 !important;
+    // }
+
+
+
+  }
+
+
+
+}

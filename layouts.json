@@ -1,0 +1,527 @@
+[
+    {
+        "key": "login",
+        "value": "เข้าสู่ระบบ",
+        "order": 1,
+        "table": {
+            "displayedColumns": [],
+            "columns": []
+        },
+        "forms": [
+            {
+                "controlType": "textbox",
+                "key": "email",
+                "label": "Email",
+                "type": "email",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "password",
+                "label": "Password",
+                "type": "password",
+                "value": "",
+                "required": true,
+                "order": 2,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "activities",
+        "value": "ข้อมูลกิจกรรม",
+        "order": 1,
+        "table": {
+            "displayedColumns": [
+                "transactionType",
+                "yyyy",
+                "mm",
+                "valueDate",
+                "menu"
+            ],
+            "columns": [
+                {
+                    "key": "transactionType",
+                    "value": "รายการ"
+                },
+                {
+                    "key": "yyyy",
+                    "value": "ปี"
+                },
+                {
+                    "key": "mm",
+                    "value": "เดือน"
+                },
+                {
+                    "key": "valueDate",
+                    "value": "กำหนดจ่าย"
+                }
+            ]
+        },
+        "forms": [
+            {
+                "key": "id",
+                "value": null
+            },
+            {
+                "controlType": "lookup",
+                "key": "transactionType",
+                "label": "ประเภทรายการ",
+                "required": true,
+                "order": 1,
+                "lov": "transection-types"
+            },
+            {
+                "controlType": "textbox",
+                "key": "yyyy",
+                "label": "ปี",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 2,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "mm",
+                "label": "เดือน",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 2,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "valueDate",
+                "label": "กำหนดจ่าย",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 2,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "companies",
+        "value": "ข้อมูลบริษัท",
+        "order": 1,
+        "table": {
+            "displayedColumns": [
+                "companyCode",
+                "companyName",
+                "isActive",
+                "menu"
+            ],
+            "columns": [
+                {
+                    "key": "companyCode",
+                    "value": "รหัสบริษัท"
+                },
+                {
+                    "key": "companyName",
+                    "value": "ชื่อบริษัท"
+                },
+                {
+                    "key": "isActive",
+                    "value": "สถานะใช้งาน"
+                }
+            ]
+        },
+        "forms": [
+            {
+                "key": "id",
+                "value": null
+            },
+            {
+                "controlType": "textbox",
+                "key": "companyCode",
+                "label": "รหัสบริษัท",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "companyName",
+                "label": "ชื่อบริษัท",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 2,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "taxID",
+                "label": "Tax ID",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 3,
+                "options": []
+            },
+            {
+                "controlType": "textarea",
+                "key": "companyAddress",
+                "label": "ที่อยู่",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 4,
+                "options": []
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isActive",
+                "label": "สถานะ",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "users",
+        "value": "ข้อมูลผู้ใช้",
+        "order": 2,
+        "table": {
+            "displayedColumns": [
+                "firstName",
+                "email",
+                "companyCode",
+                "userRole",
+                "isActive",
+                "menu"
+            ],
+            "columns": [
+                {
+                    "key": "firstName",
+                    "value": "ชื่อ-สกุล"
+                },
+                {
+                    "key": "email",
+                    "value": "Email"
+                },
+                {
+                    "key": "companyCode",
+                    "value": "บริษัท"
+                },
+                {
+                    "key": "userRole",
+                    "value": "บทบาท"
+                },
+                {
+                    "key": "isActive",
+                    "value": "สถานะใช้งาน"
+                }
+            ]
+        },
+        "forms": [
+            {
+                "key": "id",
+                "value": null
+            },
+            {
+                "controlType": "textbox",
+                "key": "firstName",
+                "label": "ชื่อ",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "lastName",
+                "label": "นามสกุล",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "email",
+                "label": "Email",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "lookup",
+                "key": "companyCode",
+                "label": "บริษัท",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "lov": "companies"
+            },
+            {
+                "controlType": "dropdown",
+                "key": "userRole",
+                "label": "บทบาท",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": [
+                    {
+                        "key": "admin",
+                        "value": "ผู้ดูแลระบบ"
+                    },
+                    {
+                        "key": "user",
+                        "value": "ผู้ใช้"
+                    }
+                ]
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isActive",
+                "label": "สถานะ",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "transection-types",
+        "value": "ประเภทรายการ",
+        "order": 3,
+        "table": {
+            "displayedColumns": [
+                "typeName",
+                "dataSource",
+                "fileLayout",
+                "isActive",
+                "menu"
+            ],
+            "columns": [
+                {
+                    "key": "typeName",
+                    "value": "ชื่อประเภทรายการ"
+                },
+                {
+                    "key": "dataSource",
+                    "value": "แหล่งข้อมูลต้นทาง"
+                },
+                {
+                    "key": "fileLayout",
+                    "value": "File Layout"
+                },
+                {
+                    "key": "isActive",
+                    "value": "สถานะใช้งาน"
+                }
+            ]
+        },
+        "forms": [
+            {
+                "key": "id",
+                "value": null
+            },
+            {
+                "controlType": "textbox",
+                "key": "typeName",
+                "label": "ชื่อประเภทรายการ",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "lookup",
+                "key": "dataSource",
+                "label": "แหล่งข้อมูลต้นทาง",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "lov": "datasources"
+            },
+            {
+                "controlType": "lookup",
+                "key": "fileLayout",
+                "label": "File Layout",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "lov": "file-layouts"
+            },
+            {
+                "controlType": "textbox",
+                "key": "bankAccoutNo",
+                "label": "เลขที่บัญชีธนาคาร",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "bankCompCode",
+                "label": "Company Code",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isPrintWHT",
+                "label": "พิมพ์ WHT",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isPrintINV",
+                "label": "พิมพ์ Invoice",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isActive",
+                "label": "สถานะ",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "datasources",
+        "value": "แหล่งข้อมูลต้นทาง",
+        "order": 4,
+        "table": {
+            "displayedColumns": [
+                "dataSourceCode",
+                "dataSourceName",
+                "dataSourceType",
+                "isActive",
+                "menu"
+            ],
+            "columns": [
+                {
+                    "key": "dataSourceCode",
+                    "value": "รหัสแหล่งข้อมูลต้นทาง"
+                },
+                {
+                    "key": "dataSourceName",
+                    "value": "ชื่อแหล่งข้อมูลต้นทาง"
+                },
+                {
+                    "key": "dataSourceType",
+                    "value": "ประเภท"
+                },
+                {
+                    "key": "isActive",
+                    "value": "สถานะใช้งาน"
+                }
+            ]
+        },
+        "forms": [
+            {
+                "key": "id",
+                "value": null
+            },
+            {
+                "controlType": "textbox",
+                "key": "dataSourceCode",
+                "label": "รหัสแหล่งข้อมูลต้นทาง",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "textbox",
+                "key": "dataSourceName",
+                "label": "ชื่อแหล่งข้อมูลต้นทาง",
+                "type": "text",
+                "value": "",
+                "required": true,
+                "order": 1,
+                "options": []
+            },
+            {
+                "controlType": "dropdown",
+                "key": "dataSourceType",
+                "label": "ประเภท",
+                "type": "text",
+                "value": "ws",
+                "required": true,
+                "order": 2,
+                "options": [
+                    {
+                        "key": "ws",
+                        "value": "Web Service"
+                    },
+                    {
+                        "key": "excel",
+                        "value": "Excel"
+                    }
+                ]
+            },
+            {
+                "controlType": "checkbox",
+                "key": "isActive",
+                "label": "สถานะ",
+                "value": true,
+                "required": true,
+                "order": 1,
+                "options": []
+            }
+        ]
+    },
+    {
+        "key": "file-layouts",
+        "value": "File Layouts",
+        "order": 5,
+        "table": {
+            "displayedColumns": [
+                "bankCode",
+                "bankName",
+                "isActive"
+            ],
+            "columns": [
+                {
+                    "key": "bankCode",
+                    "value": "รหัสธนาคาร"
+                },
+                {
+                    "key": "bankName",
+                    "value": "ชื่อธนาคาร"
+                },
+                {
+                    "key": "isActive",
+                    "value": "สถานะใช้งาน"
+                }
+            ]
+        },
+        "forms": []
+    }
+]

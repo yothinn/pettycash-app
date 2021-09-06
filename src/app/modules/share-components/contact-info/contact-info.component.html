@@ -1,0 +1,69 @@
+<div fxfill fxLayout="column" class="contact-info-container">
+
+    <div fxLayoutAling="center" fxLayout="column" fxFlex="30">
+
+        <div fxLayoutAlign="center" fxFlex="1 0 auto">
+            <div mat-card-avatar class="avatar-profile" *ngIf="!info?.imageProfile"
+                style="background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png');">
+            </div>
+            <div mat-card-avatar class="avatar-profile" *ngIf="info?.imageProfile"
+                style="background-image: url('{{info?.imageProfile}}');">
+            </div>
+        </div>
+        <div fxLayoutAlign="center" fxFlex="0 1 auto">
+            <span style="font-size: larger; padding-top: 10px; padding-left: 10px;" *ngIf="info">
+                {{info?.title}} {{info?.firstName}} {{info?.lastName}}
+            </span>
+        </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start" fxFlex="70">
+        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="10">
+            <button mat-icon-button [disabled]="!info?.lineUId" (click)="onLineClick()">
+                <mat-icon svgIcon="line"></mat-icon>
+            </button>
+            <!-- <button mat-icon-button (click)="onFbClick()">
+                <mat-icon>facebook</mat-icon>
+            </button> -->
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start" style="margin-left: 2rem" fxFlex="90">
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                <mat-icon svgIcon="idcard"></mat-icon>
+                <span style="margin: 1rem;">{{info?.shareholderId || '-'}}</span>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                <mat-icon>phone</mat-icon>
+                <span style="margin: 1rem;">{{info?.tel || '-'}}</span>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                <mat-icon>email</mat-icon>
+                <span style="margin: 1rem;">{{info?.email || '-'}}</span>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                <mat-icon>place</mat-icon>
+                <div fxLayout="column" style="margin: 1rem;">
+                    <span>{{info?.addr01 || '-'}} {{info?.street ? 'ถ.'+info?.street: ''}}</span>
+                    <span>{{info?.subDistrict}} {{info?.district}} {{info?.province}}</span>
+                    <span>{{info?.zip}}</span>
+                </div>
+            </div>
+
+
+            <div fxLayout="row" *ngIf="info?.companyName" fxLayoutAlign="start center" fxFlex=100>
+                <mat-icon>apartment</mat-icon>
+                <span style="margin: 1rem;">{{info?.companyName || '-'}}</span>
+            </div>
+
+            <div fxLayout="row" *ngIf="info?.remark" fxLayoutAlign="start center" fxFlex=100>
+                <mat-icon>new_releases</mat-icon>
+                <span style="margin: 1rem;">{{info?.remark || '-'}}</span>
+            </div>
+        </div>
+
+    </div>
+</div>

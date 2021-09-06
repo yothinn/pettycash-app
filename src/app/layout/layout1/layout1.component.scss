@@ -1,0 +1,104 @@
+@import "~@angular/material/theming";
+@import 'src/styles.scss';
+
+$nav-font-color : rgb(124, 121, 121);
+$user-btn-color : rgb(36, 19, 19);
+
+.sidenav-container {
+  height: 93%;
+  // height: 100%
+}
+
+.sidenav {
+
+  width: 62px;
+  background-color: whitesmoke;
+
+  .mat-toolbar {
+    color: white;
+    .mat-icon-button {
+      color: mat-color($ng-app-primary);
+    }
+  }
+
+  .mat-nav-list {
+    padding-bottom: 10px;
+
+    .mat-icon-button {
+      width: 60px;
+      height: 60px;
+      // margin-top: 10px;
+      // background-color: rgba(255, 255, 255, 0.644);
+      color: $nav-font-color;
+      // font-size: 20px;
+
+    }
+  }
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.user-button {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  background-color: mat-color($ng-app-primary);
+  color: white;
+  border-radius: 50%;
+}
+
+.user-info-bar {
+  padding: 10px 10px 10px 40px;
+
+  h3 {
+    font-size: 14px;
+  }
+
+  span {
+    color: gray;
+    font-size: 12px;
+    margin-top: -15px;
+  }
+}
+
+.router-link-active {
+
+  background-color: rgba(255, 255, 255, 0.644);
+
+  // padding-left: 10px;
+  .mat-icon-button {
+    // background-color: rgba(255, 255, 255, 0.644);
+    color: mat-color($ng-app-primary) !important;
+    // color: #666f86 !important;
+  }
+}
+
+
+.app-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.app-banner {
+  height:100px;
+}
+
+.sub-toolbar {
+  height: 40px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.chat {
+  width: 40px;
+}

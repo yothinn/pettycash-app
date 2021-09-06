@@ -1,0 +1,43 @@
+<!-- <div fxLayout="column" fxLayoutAlign="start" style="padding: 0 10px 0 10px ;" #trigger (click)="$event.stopPropagation();">
+    <div fxLayout="row" fxFlex="1 0 auto" fxLayoutAlign="start center" *ngFor="let item of ['option 11111111111','option 2   ','option 3    ']">
+        <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">{{item}}</div>
+        <button mat-icon-button fxFlex="0 1 auto" fxLayoutAlign="end">
+            <mat-icon class="mat-12" >edit</mat-icon>
+        </button>
+    </div>
+    
+    <div fxLayout="row" fxFlex="0 1 auto" fxLayoutAlign="center center" style="margin-top: 20px;">
+        <button mat-stroked-button (click)="trigger.close()">สร้างรายการใหม่</button>
+    </div>
+</div> -->
+
+
+<mat-drawer-container >
+    <mat-drawer-content fxLayout="column">
+        <mat-toolbar>
+            <span>Title</span>
+        </mat-toolbar>
+        <div fxLayout="column" fxLayoutAlign="start" style="padding: 0 10px 0 10px ;" #trigger >
+            <div fxLayout="row" fxFlex="1 0 auto" fxLayoutAlign="start center" *ngFor="let item of ['option 11111111111','option 2   ','option 3    ']">
+                <div fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">{{item}}</div>
+                <button mat-icon-button fxFlex="0 1 auto" fxLayoutAlign="center" (click)="$event.stopPropagation(); drawer.toggle();">
+                    <mat-icon class="mat-12" >edit</mat-icon>
+                </button>
+            </div>
+            
+            <div fxLayout="row" fxFlex="0 1 auto" fxLayoutAlign="center center" style="margin-top: 20px;">
+                <button mat-stroked-button (click)="$event.stopPropagation(); drawer.toggle()">สร้างรายการใหม่</button>
+            </div>
+        </div>
+       
+    </mat-drawer-content>
+    <mat-drawer #drawer mode="over" position="end" fxFlexFill>
+       <mat-toolbar>
+           <button mat-icon-button (click)="$event.stopPropagation(); drawer.toggle()" fxFlex="1 0 auto" fxLayoutAlign="center">
+               <mat-icon class="mat-18">arrow_back_ios</mat-icon>
+           </button>
+           <span fxFlex="1 0 auto" fxLayoutAlign="center">สร้างรายการใหม่</span>
+       </mat-toolbar>
+       <button mat-button>Action</button>
+    </mat-drawer>
+</mat-drawer-container>

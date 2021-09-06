@@ -1,0 +1,59 @@
+<app-progressbar *ngIf="auth.authStateObservable$ | async"></app-progressbar>
+<mat-toolbar *ngIf="auth.authStateObservable$ | async">
+  <div fxFill fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+      <span></span>
+      <img class="app-banner" src="/assets/images/logo/app-logo.png" alt="">
+      <span>ระบบเงินสดย่อย</span>
+    </div>
+    <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+      <button type="button" mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="user-info-bar">
+        <h3>{{user?.firstName}} {{user?.lastName}}</h3>
+      </div>
+      <button mat-icon-button>
+        <div class="user-button" [matMenuTriggerFor]="userMenu" fxFlex fxLayout="row" fxLayoutAlign="center center">
+          {{(user?.firstName | shotName)}}{{(user?.lastName | shotName)}}
+        </div>
+      </button>
+
+      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="openResetPasswordDialog()">
+          <mat-icon svgIcon="change-password"></mat-icon>
+          <span>Change Password</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #maindrawer class="sidenav" [mode]="'side'" [opened]="true" *ngIf="auth.authStateObservable$ | async">
+    <mat-nav-list fxFill fxLayout="column" fxLayoutAlign="start center">
+      <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
+
+        <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+          <button mat-icon-button>
+            <mat-icon>dashboard</mat-icon>
+          </button>
+        </a>
+
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    
+
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#039be5" type="ball-scale-pulse">
+  <p style="font-size: 14px; color: white; margin-top: 14px;">กำลังโหลด...</p>
+</ngx-spinner>

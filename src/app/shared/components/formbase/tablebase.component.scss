@@ -1,0 +1,7 @@
+@import "~@angular/material/theming";
+@import 'src/styles.scss';
+
+.mat-row:hover {
+  background-color: rgba(0, 0, 0, 0.150);
+  cursor: pointer;
+}

@@ -1,0 +1,45 @@
+
+<mat-drawer-container fxFlex fxLayout="row" fxLayoutAlign="start start">
+
+    <mat-drawer-content class="content-panel">
+        
+        <mat-toolbar>
+            <div fxFill fxLayout="row" fxLayoutAlign="start center">
+                <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+                    <span>{{selected?.value | titlecase}}</span>
+                </div>
+                <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-flat-button color="primary" (click)="onAddNew()">
+                        <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+                            เพิ่ม{{selected?.value | titlecase}}
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </mat-toolbar>
+        <div *ngIf="selected && dataSource">
+            <app-tablebase [dataSource]="dataSource" [table]="selected.table"
+                (onEditRow)="onEdit($event)" (onDeleteRow)="onDelete($event)"
+                (onPageEventChanged)="getServerData($event)">
+            </app-tablebase>
+        </div>
+    </mat-drawer-content>
+
+
+    <mat-drawer #drawer class="right-panel" mode="over" position="end" fxLayout="column" fxLayoutAlign="start center">
+        <mat-toolbar>
+            <span>เพิ่ม{{selected?.value | titlecase}}</span>
+        </mat-toolbar>
+        <form class="content" (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="selected">
+            <div *ngFor="let control of formBase">
+                <app-formbase [form]="form" [control]="control"></app-formbase>
+            </div>
+            <div fxLayoutAlign="center end">
+                <button fxFlex="80" mat-raised-button color="primary" type="submit"
+                    [disabled]="!form.valid">ยืนยัน</button>
+            </div>
+
+        </form>
+    </mat-drawer>
+
+</mat-drawer-container>

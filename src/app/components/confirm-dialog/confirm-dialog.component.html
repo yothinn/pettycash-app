@@ -1,0 +1,24 @@
+<div fxLayout="row" fxFlexFill fxLayoutGap="1em" >
+    <div fxFlex="20">
+        <mat-icon class="icon-confirm">warning</mat-icon>
+    </div>
+    <div fxFlex="80" fxLayout="column" fxLayoutGap="1em">
+        <div name="header-container">
+            <h3><strong>{{data?.header ? data?.header : 'Confirmation'}}</strong></h3>
+        </div>
+
+        <div name="message-content" class="message-content" fxFlex="60">
+            {{data?.message ? data.message : DEFAULT_MESSAGE }}
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" fxFlex="20">
+            <button color="primary" name="btn-ok" mat-raised-button (click)="onOk()" class="btn-ok">
+                OK
+            </button>
+            <button color="warn" name="btn-cancel" mat-raised-button (click)="onCancel()" class="btn-cancel">
+                Cancel
+            </button>
+        
+        </div>
+    </div>
+</div> 

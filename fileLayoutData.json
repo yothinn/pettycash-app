@@ -1,0 +1,91 @@
+[
+    {
+      "productCode": "PAY",
+      "count": 1,
+      "sum": 104,
+      "items": [
+        {
+          "YYYY": "2020",
+          "MM": "11",
+          "PAYMENT_DOCNO": "PV2020120001",
+          "VENDER_CODE": "VK-00071-00",
+          "VENDER_NAME": "Mr theerasak",
+          "VENDER_TAX_ID": "111111111111",
+          "VENDER_ADDR": "",
+          "VENDER_BANK_CODE": "014",
+          "VENDER_BANK_BRANCH": "0206",
+          "VENDER_BANK_ACCNT": "2062019657",
+          "NET_PAID_AMT": 104,
+          "INVOUCE_DETAILS": [
+            {
+              "PAYMENT_DOCNO": "PV-0002",
+              "PO_DOCNO": "PO-0002",
+              "INV_DOCNO": "INV-002",
+              "TOTAL_AMT": 100,
+              "VAT_AMT": 7,
+              "WHT_AMT": 3,
+              "NET_AMT": 104
+            }
+          ],
+          "PRODUCT_CODE": "PAY"
+        }
+      ]
+    },
+    {
+      "productCode": "PA4",
+      "count": 2,
+      "sum": 2080,
+      "items": [
+        {
+          "YYYY": "2020",
+          "MM": "11",
+          "PAYMENT_DOCNO": "PV2020120002",
+          "VENDER_CODE": "VK-00071-00",
+          "VENDER_NAME": "นาย ก รักไทย",
+          "VENDER_TAX_ID": "111111111111",
+          "VENDER_ADDR": "",
+          "VENDER_BANK_CODE": "002",
+          "VENDER_BANK_BRANCH": "0206",
+          "VENDER_BANK_ACCNT": "2062019657",
+          "NET_PAID_AMT": 1040,
+          "INVOUCE_DETAILS": [
+            {
+              "PAYMENT_DOCNO": "PV-0002",
+              "PO_DOCNO": "PO-0002",
+              "INV_DOCNO": "INV-003",
+              "TOTAL_AMT": 1000,
+              "VAT_AMT": 70,
+              "WHT_AMT": 30,
+              "NET_AMT": 1040
+            }
+          ],
+          "PRODUCT_CODE": "PA4"
+        },
+        {
+          "YYYY": "2020",
+          "MM": "11",
+          "PAYMENT_DOCNO": "PV2020120003",
+          "VENDER_CODE": "VK-00071-00",
+          "VENDER_NAME": "นาย ข รักไทย",
+          "VENDER_TAX_ID": "111111111111",
+          "VENDER_ADDR": "",
+          "VENDER_BANK_CODE": "002",
+          "VENDER_BANK_BRANCH": "0206",
+          "VENDER_BANK_ACCNT": "2062019657",
+          "NET_PAID_AMT": 1040,
+          "INVOUCE_DETAILS": [
+            {
+              "PAYMENT_DOCNO": "PV-0003",
+              "PO_DOCNO": "PO-0003",
+              "INV_DOCNO": "INV-0004",
+              "TOTAL_AMT": 1000,
+              "VAT_AMT": 70,
+              "WHT_AMT": 30,
+              "NET_AMT": 1040
+            }
+          ],
+          "PRODUCT_CODE": "PA4"
+        }
+      ]
+    }
+  ]

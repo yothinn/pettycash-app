@@ -1,0 +1,58 @@
+@import "src/app/shared/scss/app.scss";
+
+.mat-drawer-container {
+  width: 100%;
+  min-height: calc(100vh);
+
+  .login-right-panel {
+    width: 390px;
+    min-width: 390px;
+    max-width: 390px;
+    padding-top: 100px;
+  }
+
+  .login-content-panel {
+    width: 100%;
+    background: url('/assets/backgrounds/bg.jpeg') no-repeat;
+    background-size: cover;
+    color: white;
+    padding: 128px;
+
+    @include media-breakpoint('sm') {
+      padding: 128px 64px;
+    }
+
+    .logo {
+      width: 128px;
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .description {
+      padding-top: 16px;
+      font-size: 14px;
+      max-width: 600px;
+    }
+  }
+
+
+}
+
+.register {
+  margin: 32px auto 24px auto;
+  width: 250px;
+  font-weight: 600;
+
+  .text {
+      margin-right: 8px;
+  }
+
+  .link {
+
+  }
+}

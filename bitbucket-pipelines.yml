@@ -1,0 +1,21 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:10.15.0
+
+pipelines:
+  branches:
+    '{master}':
+      - step:
+          name: Build and test
+          image: rastasheep/alpine-node-chromium:12-alpine
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run lint
+            - npm run test:prod
+            - npm run build
+          artifacts:
+            - dist/**

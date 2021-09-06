@@ -1,0 +1,93 @@
+
+<div fxLayout="column" fxFlex="100">
+    <h2>ตั้งค่าร้านค้า</h2>
+
+
+    <div fxLayout="row wrap" fxFlex="100">
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50">
+            <mat-card-header>
+                <mat-card-title >
+                    <mat-icon svgIcon="shop"></mat-icon>
+                    <span style="margin-left: 10px;">ตั้งค่าข้อมูลทั่วไป</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>สร้างหรืออัปเดตข้อมูลร้านค้า (ชื่อร้าน, ที่อยู่ร้านค้า, อีเมล)</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+    
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>payments</mat-icon>
+                    <span style="margin-left: 10px;">ตั้งค่าช่องทางชำระเงิน</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>สร้างหรือจัดการช่องทางชำระเงินในร้านค้าของคุณ (บัญชีธนาคาร)</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+    
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>local_shipping</mat-icon>
+                    <span style="margin-left: 10px;">ตั้งค่าการจัดส่งสินค้า</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>สร้างหรือจัดการช่องทางจัดส่งสินค้าของร้านคุณ</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+    
+       
+    
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>list_alt</mat-icon>
+                    <span style="margin-left: 10px;">ตั้งค่าคำสั่งซื้อ</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>สร้างหรือเปลี่ยนวันหมดอายุคำสั่งซื้อ</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+    
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon>notifications</mat-icon>
+                    <span style="margin-left: 10px;">ตั้งค่าการแจ้งเตือน</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>ตั้งค่าการแจ้งเตือนสำหรับแอดมิน</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+
+        <mat-card fxFlex="30" xs.fxFlex="100" sm.fxFlex="50"
+            [routerLink]="['./user-manage']" 
+            routerLinkActive="router-link-active"
+            *ngIf="isAdminRole()"
+        >
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon svgIcon="usermanage"></mat-icon>
+                    <span style="margin-left: 10px;">จัดการผู้ใช้งาน</span>
+                </mat-card-title>
+                <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px;">
+                    <span>เพิ่ม ลบ หรือแก้ไขผู้ใช้ และสิทธิการใช้งาน</span>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+        </mat-card>
+        
+    </div>
+</div>
+

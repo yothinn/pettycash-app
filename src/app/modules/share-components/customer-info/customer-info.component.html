@@ -1,0 +1,91 @@
+<div fxfill fxLayout="column">
+    <div fxLayoutAlign="center" *ngIf="customerInfo" fxFlex>
+        <div fxLayout="column" fxFlex>
+            <div fxLayout="row" fxFlex>
+                <div fxLayoutAlign="center" fxFlex>
+                    <div mat-card-avatar class="avatar-profile" *ngIf="!customerInfo?.imageLogo"
+                        style="background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png');">
+                    </div>
+                    <div mat-card-avatar class="avatar-profile" *ngIf="customerInfo?.imageLogo"
+                        style="background-image: url('{{customerInfo?.imageLogo}}');">
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxFlex>
+                <div fxLayoutAlign="center" fxFlex>
+                    <span style="font-size: larger; padding-top: 10px; padding-left: 10px;" *ngIf="customerInfo">
+                        {{customerInfo.title}} {{customerInfo.name}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start" *ngIf="customerInfo" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+            <button mat-icon-button [disabled]="!customerInfo?.lineUID" (click)="onLineCustomerClick()">
+                <mat-icon svgIcon="line"></mat-icon>
+            </button>
+            <button mat-icon-button (click)="onFbCustomerClick()">
+                <mat-icon>facebook</mat-icon>
+            </button>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start" fxFlex>
+            <div fxLayout="row" fxLayoutAlign="start center" style="padding: 20px 0 0 20px;" *ngIf="customerInfo?.email"
+                fxFlex>
+                <mat-icon>email</mat-icon>
+                <p style="margin: 10px;">{{customerInfo.email}}</p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" style="padding: 20px 0 0 20px;" *ngIf="customerInfo?.tel"
+                fxFlex>
+                <mat-icon>phone</mat-icon>
+                <p style="margin: 10px;">{{customerInfo.tel}}</p>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <mat-divider>></mat-divider>
+    <!-- Contact part-->
+    <div fxLayout="column" fxLayoutAlign="start" *ngIf="contactInfo" fxFlex>
+        <h4>ข้อมูลผู้ติดต่อ</h4>
+        <div fxLayout="row" *ngIf="!customerInfo" fxFlex>
+            <div fxLayoutAlign="center" fxFlex>
+                <div mat-card-avatar class="avatar-profile" *ngIf="!contactInfo?.imageProfile"
+                    style="background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png');">
+                </div>
+                <div mat-card-avatar class="avatar-profile" *ngIf="contactInfo?.imageProfile"
+                    style="background-image: url('{{contactInfo?.imageProfile}}');">
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row wrap" fxFlex>
+            <div fxLayoutAlign="start" fxFlex>
+                <span style="font-size: larger; padding-top: 10px; padding-left: 20px;" *ngIf="contactInfo">
+                    {{contactInfo.title}} {{contactInfo.name}}
+                </span>
+            </div>
+            <button mat-icon-button [disabled]="!contactInfo?.lineUID" (click)="onLineContactClick()">
+                <mat-icon svgIcon="line"></mat-icon>
+            </button>
+            <button mat-icon-button (click)="onFbContactClick()">
+                <mat-icon>facebook</mat-icon>
+            </button>
+        </div>
+       
+
+        <div fxLayout="row" fxLayoutAlign="start center" style="padding: 20px 0 0 20px;" *ngIf="contactInfo.email"
+            fxFlex>
+            <mat-icon>email</mat-icon>
+            <p style="margin: 10px;">{{contactInfo.email}}</p>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" style="padding: 20px 0 0 20px;" *ngIf="contactInfo.tel" fxFlex>
+            <mat-icon>phone</mat-icon>
+            <p style="margin: 10px;">{{contactInfo.tel }}</p>
+        </div>
+    </div>
+</div>

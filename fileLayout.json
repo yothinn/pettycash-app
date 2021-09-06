@@ -1,0 +1,867 @@
+{
+    "bankCode": "014",
+    "bankName": "SCB",
+    "bankFullName": "ธนาคารไทยพาณิชย์",
+    "usedProducts": [
+        "PAY",
+        "PA4"
+    ],
+    "rows": [
+        {
+            "name": "Header",
+            "rowtype": "header",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "001",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Company Id",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "PT10001",
+                    "required": true,
+                    "length": 12
+                },
+                {
+                    "name": "Customer Reference",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "PTA",
+                    "required": true,
+                    "length": 32
+                },
+                {
+                    "name": "Message/File Date",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$now('[Y][M][D]')",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Message/File Time",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "000000",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Channel Id",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "BCM",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Batch Reference",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "G5202009",
+                    "required": true,
+                    "length": 32
+                }
+            ],
+            "length": 96
+        },
+        {
+            "name": "Debit Details",
+            "rowtype": "groups",
+            "required": true,
+            "groupby": "PRODUCT_CODE",
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "002",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Product Code",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$key",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Value Date",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.PAY_DATE ~> $distinct()",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Debit Account No",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "0343042559",
+                    "required": true,
+                    "length": 25
+                },
+                {
+                    "name": "Account Type of Debit Account",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "00",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Debit Branch Code",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "0000",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Debit Currency",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "THB",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Debit Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$sum($value.NET_PAID_AMT) ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "Internal Reference",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($key ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "No. of Credits",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$count($value.VENDER_CODE) ~> $formatNumber('0')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Fee Debit Account",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "0343042559",
+                    "required": true,
+                    "length": 15
+                },
+                {
+                    "name": "Filler",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 9
+                },
+                {
+                    "name": "Media Clearing Cycle (Filler)",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Account Type (Fee)",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "00",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Debit Branch Code (Fee)",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "0000",
+                    "required": true,
+                    "length": 4
+                }
+            ],
+            "length": 109
+        },
+        {
+            "name": "Credit Details",
+            "rowtype": "details",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "003",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Credit Sequence Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$index + 1 ~> $formatNumber('00')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Credit Account",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.VENDER_BANK_CODE = '014' ? $substring($value.VENDER_BANK_ACCNT, 1) : $value.VENDER_BANK_ACCNT)",
+                    "required": true,
+                    "length": 25
+                },
+                {
+                    "name": "Credit Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "Credit Currency",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "THB",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Internal Reference",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "WHT Present",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "N",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Invoice Details Present",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "N",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Credit Advice Required",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "Y",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Delivery Mode",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "S",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Pickup Location",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 4
+                },
+                {
+                    "name": "WHT Form Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "00",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "WHT Tax Running No.",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 14
+                },
+                {
+                    "name": "WHT Attach No.",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "000000",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "No. of WHT Details",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Total WHT Amount",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "No. of Invoice Details",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Total Invoice Amount",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "WHT Pay Type",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "WHT Remark",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 40
+                },
+                {
+                    "name": "WHT Deduct Date",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Receiving Bank Code",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.VENDER_BANK_CODE",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Receiving Bank Name",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 35
+                },
+                {
+                    "name": "Receiving Branch Code",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.VENDER_BANK_BRANCH",
+                    "required": true,
+                    "length": 4
+                },
+                {
+                    "name": "Receiving Branch Name",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 35
+                },
+                {
+                    "name": "WHT Signatory",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Beneficiary Notification",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Customer Reference Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.VENDER_CODE",
+                    "required": true,
+                    "length": 20
+                },
+                {
+                    "name": "Cheque Reference Document Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 1
+                },
+                {
+                    "name": "Payment Type Code",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "ServicesType",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "04",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Remark",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 50
+                },
+                {
+                    "name": "SCB Remark",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 18
+                },
+                {
+                    "name": "Beneficiary Charge",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "B",
+                    "required": true,
+                    "length": 2
+                }
+            ],
+            "length": 355
+        },
+        {
+            "name": "Payee Details",
+            "rowtype": "details",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "004",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Internal Reference",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Credit Sequence Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$index + 1 ~> $formatNumber('00')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Payee1 IDCard",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 15
+                },
+                {
+                    "name": "Payee1 Name (Thai)",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 100
+                },
+                {
+                    "name": "Payee1 Address 1",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee1 Address 2",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee1 Address 3",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee1 Tax ID",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 10
+                },
+                {
+                    "name": "Payee1 Name (English)",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.VENDER_NAME",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee1 Fax Number",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 10
+                },
+                {
+                    "name": "Payee1 Mobile Phone Number",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 10
+                },
+                {
+                    "name": "Payee1 E-mail Address",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 64
+                },
+                {
+                    "name": "Payee2 Name (Thai)",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 100
+                },
+                {
+                    "name": "Payee2 Address 1",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee2 Address 2",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "Payee2 Address 3",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                }
+            ],
+            "length": 816
+        },
+        {
+            "name": "WHT Details",
+            "rowtype": "details",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "005",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Internal Reference",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Credit Sequence Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$index + 1 ~> $formatNumber('00')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "WHT Sequence Number",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "1",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "WHT Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "WHT Income Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "1",
+                    "required": true,
+                    "length": 5
+                },
+                {
+                    "name": "Income Description",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 77
+                },
+                {
+                    "name": "WHT Deduct Rate",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 5
+                },
+                {
+                    "name": "Income Type Amount",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "0",
+                    "required": true,
+                    "length": 16
+                }
+            ],
+            "length": 138
+        },
+        {
+            "name": "Invoice Details",
+            "rowtype": "details",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "006",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Internal Reference",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Credit Sequence Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$index + 1 ~> $formatNumber('00')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Invoice Sequence Number",
+                    "fieldtype": "textfield",
+                    "datatype": "number",
+                    "value": "1",
+                    "required": true,
+                    "length": 2
+                },
+                {
+                    "name": "Invoice Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 15
+                },
+                {
+                    "name": "Invoice Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "Invoice Date",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "$value.PAY_DATE ~> $distinct()",
+                    "required": true,
+                    "length": 8
+                },
+                {
+                    "name": "Invoice Description",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": " ",
+                    "required": true,
+                    "length": 70
+                },
+                {
+                    "name": "PO Number",
+                    "fieldtype": "formulafield",
+                    "datatype": "string",
+                    "value": "($value.PRODUCT_CODE ~> $pad(7, '0')) & '1'",
+                    "required": true,
+                    "length": 15
+                },
+                {
+                    "name": "VAT Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "Payee Charge Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "WHT Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$value.NET_PAID_AMT ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                },
+                {
+                    "name": "Print Language",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "T",
+                    "required": true,
+                    "length": 1
+                },
+            ],
+            "length": 196
+        },
+        {
+            "name": "Trailer",
+            "rowtype": "footer",
+            "required": true,
+            "groupby": null,
+            "fields": [
+                {
+                    "name": "Record Type",
+                    "fieldtype": "textfield",
+                    "datatype": "string",
+                    "value": "999",
+                    "required": true,
+                    "length": 3
+                },
+                {
+                    "name": "Total No. of Debits",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "PRODUCT_CODE ~> $distinct() ~> $count() ~> $formatNumber('0')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Total No. of Credits",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$count(VENDER_CODE) ~> $formatNumber('0')",
+                    "required": true,
+                    "length": 6
+                },
+                {
+                    "name": "Total Amount",
+                    "fieldtype": "formulafield",
+                    "datatype": "number",
+                    "value": "$sum(NET_PAID_AMT) ~> $formatNumber('00.000') ~> $split('.')  ~> $join()",
+                    "required": true,
+                    "length": 16
+                }
+            ],
+            "length": 31
+        }
+    ],
+    "isActive": "true"
+}

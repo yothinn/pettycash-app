@@ -1,0 +1,24 @@
+<div fxLayout="column" fxLayoutAlign="start" class="empty-form">
+
+  <div fxLayout="column" fxLayoutAlign="center">
+
+    <!-- lineContact -->
+    <div fxLayoutAlign="center" fxFlex="1 0 auto">
+      <div mat-card-avatar class="avatar-profile" *ngIf="!activeContact.profile?.iconHash"
+        style="background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png');">
+      </div>
+      <div mat-card-avatar class="avatar-profile" *ngIf="activeContact.profile?.iconHash"
+        style="background-image: url('https://profile.line-scdn.net/{{activeContact.profile.iconHash}}/preview');">
+      </div>
+    </div>
+    <div fxLayoutAlign="center" fxFlex="0 1 auto">
+      <p style="font-size: larger; padding-top: 10px; padding-left: 10px;" *ngIf="activeContact">
+        {{activeContact.profile.nickname || activeContact.profile.name}}
+      </p>
+    </div>
+    <div fxLayoutAlign="center">
+      <button mat-raised-button (click)="onAddNewContactClick()">เพิ่มข้อมูลผู้ติดต่อ</button>
+    </div>
+  </div>
+
+</div>

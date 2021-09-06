@@ -1,0 +1,19 @@
+.empty-form {
+  // min-height: calc(100vh - 140px);
+  // background-color: blue;
+  // border: 1px solid blue;
+}
+
+.avatar-profile {
+    height: 192px;
+    width: 192px;
+    background-size: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.mat-toolbar-right {
+  position: sticky;
+  top: 0 !important;
+}
