@@ -34,7 +34,7 @@ export const MY_FORMATS = {
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +84,9 @@ export class AppModule {
     iconRegistry.addSvgIcon(
       'idcard',
       sanitizer.bypassSecurityTrustResourceUrl('assets/svg/id-card_2.svg'));
+    iconRegistry.addSvgIcon(
+      'pettyCash',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/svg/pettyCash.svg'));
   }
 
 }

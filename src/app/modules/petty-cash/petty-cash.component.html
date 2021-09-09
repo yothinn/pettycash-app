@@ -1,0 +1,26 @@
+<mat-drawer-container class="contact-container">
+    <mat-drawer fxLayout="column" class="contact-left-panel" mode="side" opened="true" position="start">
+        <div>
+            <button mat-menu-item (click)="openDialogAddEmployee('aa')">
+                <mat-icon>person_add</mat-icon>
+                <span>เพิ่มข้อมูลผู้ติดต่อ</span>
+              </button>
+        </div>
+        <div fxLayoutAlign="center" class="search">
+            <mat-form-field appearance="outline">
+                <mat-label><mat-icon class="search">search</mat-icon></mat-label>
+                <input #searchList matInput placeholder="Search..." >
+            </mat-form-field>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+            <app-employee-list></app-employee-list>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="contact-content-panel" fxLayout="column">
+        <router-outlet></router-outlet>
+
+    </mat-drawer-content>
+
+</mat-drawer-container>

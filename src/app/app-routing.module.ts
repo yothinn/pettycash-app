@@ -13,6 +13,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'petty-cash',
+    loadChildren: () => import('./modules/petty-cash/petty-cash.module').then(m => m.PettyCashModule)
+  },
+  {
     path: '**',
     redirectTo: 'dashboard'
   }

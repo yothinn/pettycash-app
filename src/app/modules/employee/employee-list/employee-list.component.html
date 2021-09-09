@@ -1,0 +1,31 @@
+<mat-selection-list [multiple]="false">
+    <mat-list-option class="contact-list">
+        <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <a class="size-name">
+                <!-- {{item.name}} {{item.lastName}} -->
+            </a>
+            <div fxLayoutAlign="end">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>edit</mat-icon>
+                        <span>edit</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>delete</mat-icon>
+                        <span>delete</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <a class="size-amount">
+            </a>
+            <a class="limit">
+                <!-- วงเงิน {{item.financialAmount | number:"0.2"}} -->
+            </a>
+        </div>
+    </mat-list-option>
+</mat-selection-list>
