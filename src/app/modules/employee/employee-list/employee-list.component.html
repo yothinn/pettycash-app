@@ -1,3 +1,16 @@
+<div>
+    <button mat-menu-item (click)="openDialogAddEmployee('aa')">
+        <mat-icon>person_add</mat-icon>
+        <span>เพิ่มข้อมูลผู้ติดต่อ</span>
+      </button>
+</div>
+<div fxLayoutAlign="center" class="search">
+    <mat-form-field appearance="outline">
+        <mat-label><mat-icon class="search">search</mat-icon></mat-label>
+        <input #searchList matInput placeholder="Search..." >
+    </mat-form-field>
+</div>
+<mat-divider></mat-divider>
 <mat-selection-list [multiple]="false">
     <mat-list-option class="contact-list">
         <div fxLayout="row" fxLayoutAlign="space-between stretch">

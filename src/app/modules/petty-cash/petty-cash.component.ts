@@ -14,11 +14,5 @@ export class PettyCashComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialogAddEmployee(data): void {
-    const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: "400px",
-      data:data
-    });
-    dialogRef.afterClosed().subscribe()
-  }
+  
 }
