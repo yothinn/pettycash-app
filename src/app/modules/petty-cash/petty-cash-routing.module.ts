@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PettyCashComponent } from './petty-cash.component';
+import { FormbaseService } from 'src/app/shared/components/formbase/formbase.service';
 
 const routes: Routes = [
   {
     path: '',
     component: PettyCashComponent,
+    resolve: [FormbaseService]
   }
 ];
 

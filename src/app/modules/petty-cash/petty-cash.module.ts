@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PettyCashTableComponent } from './petty-cash-table/petty-cash-table.component';
 import { EmployeeModule } from 'src/app/modules/employee/employee.module';
 import { PettyCashRoutingModule } from './petty-cash-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PettyCashRoutingModule } from './petty-cash-routing.module';
     CommonModule,
     SharedModule,
     EmployeeModule,
-    PettyCashRoutingModule
+    PettyCashRoutingModule,
+    HttpClientModule
   ]
 })
 export class PettyCashModule { }

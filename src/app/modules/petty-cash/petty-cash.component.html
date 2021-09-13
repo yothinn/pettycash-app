@@ -1,16 +1,21 @@
 <mat-drawer-container class="contact-container">
     <mat-drawer fxLayout="column" class="contact-left-panel" mode="side" opened="true" position="start">
         <div>
-            <app-employee-list></app-employee-list>
+            <app-employee-list ></app-employee-list>
         </div>
     </mat-drawer>
 
     <mat-drawer-content class="contact-content-panel" fxLayout="column">
-        <mat-tab-group [disableRipple]="false">
-            <mat-tab label="ข้อมูลรายการ">
+        <mat-toolbar class="toolbar">
+            <!-- <span fxFlex="60">{{activeContact.title}} {{activeContact.firstName}} {{activeContact.lastName}}</span> -->
+            <div fxFlex="40" fxLayoutGap="10px" fxLayoutAlign="start center">
+              <button mat-flat-button name="btn-addnew-certs" color="primary"
+                (click)="onDialogAddItem('')">
+                เพิ่มรายการ
+              </button>
+            </div>
+          </mat-toolbar>
                 <app-petty-cash-table></app-petty-cash-table>
-            </mat-tab>
-        </mat-tab-group>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 
