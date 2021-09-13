@@ -9,7 +9,13 @@
             </div>
         </div>
     </mat-toolbar>
-    <div fxFlex="1 0 auto" *ngFor="let control of formBase" >
-        <app-formbase [form]="form" [control]="control"></app-formbase>
-    </div>
+    <form fxLayout="column" class="content" (ngSubmit)="onSubmit()">
+        <div fxFlex="1 0 auto" *ngFor="let control of formBase">
+            <app-formbase [form]="form" [control]="control"></app-formbase>
+        </div>
+        <div fxFlex="0 1 auto" fxLayoutAlign="center end" style="margin: 20px 0 20px 0;">
+            <button fxFlex="80" mat-raised-button color="primary" type="submit"
+                [disabled]="!form?.valid">ยืนยัน</button>
+        </div>
+    </form>
 </div>

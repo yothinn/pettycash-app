@@ -18,7 +18,7 @@
         <mat-list-option class="employee-list" *ngFor="let item of employeeList">
             <div fxLayout="row" fxLayoutAlign="space-between stretch">
                 <a class="name">
-                    {{ item.title + item.name}} {{item.lastName}}
+                    {{ item.title + item.firstName}} {{item.lastName}}
                 </a>
                 <div fxLayoutAlign="end">
                     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

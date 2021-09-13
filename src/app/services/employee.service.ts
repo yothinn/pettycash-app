@@ -18,4 +18,7 @@ export class EmployeeService {
   getEmployee(): Observable<any>{
     return this.http.get('http://localhost:3000/api/employees')
   }
+  updateEmployee(body: any): Observable<any>{
+    return this.http.put(`http://localhost:3000/api/employees/${body._id}`, body)
+  }
 }

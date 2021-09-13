@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { Formbase } from 'src/app/shared/components/formbase/formbase';
 import { FormbaseService } from 'src/app/shared/components/formbase/formbase.service';
+import { Utils } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-add-employee',
@@ -19,6 +21,7 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
+    private employeeService: EmployeeService,
     private formBaseService: FormbaseService ,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
@@ -47,5 +50,24 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
   }
   onClose() {
     this.dialogRef.close();
+  }
+  onSubmit(): void {
+    let payLoad = this.form.getRawValue();
+
+    console.log(payLoad);
+
+    if (!this.data) {
+      console.log(payLoad);
+      this.employeeService.createEmployee(payLoad).subscribe((res: any) => {
+        this.dialogRef.close(res);
+      })
+    } else {
+      payLoad.id = this.data.id;
+      this.employeeService.updateEmployee(payLoad).subscribe(res => {
+        console.log(res);
+        this.dialogRef.close(res);
+      })
+    }
+
   }
 }
