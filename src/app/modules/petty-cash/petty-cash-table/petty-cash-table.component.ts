@@ -7,7 +7,6 @@ import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleCh
 })
 export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() employeeId: string;
-  certs: any;
   user: any;
 
   table: any = {
