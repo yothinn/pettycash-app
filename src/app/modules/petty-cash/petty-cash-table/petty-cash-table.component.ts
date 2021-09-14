@@ -11,8 +11,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   table: any = {
     displayedColumns: [
-      "created",
       "no",
+      "created",
       "description",
       "deposit",
       "withdraw",

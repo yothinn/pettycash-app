@@ -5,17 +5,22 @@
     </button>
 </div>
 <div fxLayoutAlign="center" class="search">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="field-search">
         <mat-label>
-            <mat-icon class="search">search</mat-icon>
+            <mat-icon>search</mat-icon>
         </mat-label>
-        <input #searchList matInput placeholder="Search...">
+        <input #searchContact matInput placeholder="Search...">
+
+        <button matSuffix *ngIf="isSearching" mat-icon-button (click)="cancelSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+
     </mat-form-field>
 </div>
 <mat-divider></mat-divider>
-<div class="scrol">
+<div class="scrol" #contactList >
     <mat-selection-list [multiple]="false">
-        <mat-list-option class="employee-list" *ngFor="let item of employeeList">
+        <mat-list-option class="employee-list" *ngFor="let item of employeeList" (click)="chooseContact(item)">
             <div fxLayout="row" fxLayoutAlign="space-between stretch">
                 <a class="name">
                     {{ item.title + item.firstName}} {{item.lastName}}
@@ -25,7 +30,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="openAddEmployeeDialog(item)">
                             <mat-icon>edit</mat-icon>
                             <span>edit</span>
                         </button>

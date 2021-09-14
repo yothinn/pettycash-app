@@ -61,9 +61,9 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
       this.employeeService.createEmployee(payLoad).subscribe((res: any) => {
         this.dialogRef.close(res);
       })
+      
     } else {
-      payLoad.id = this.data.id;
-      this.employeeService.updateEmployee(payLoad).subscribe(res => {
+      this.employeeService.updateEmployee(this.data._id,payLoad).subscribe(res=> {
         console.log(res);
         this.dialogRef.close(res);
       })
