@@ -1,4 +1,7 @@
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PettyCashService } from 'src/app/services/petty-cash.service';
 
 @Component({
   selector: 'app-petty-cash-table',
@@ -52,19 +55,36 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       "edit", "download"   
     ]
   };
+  private _unsubscribeAll: Subject<any>;
 
-  constructor() { }
+  constructor(private pettyCashService: PettyCashService,) {
+    this._unsubscribeAll = new Subject();
+   }
   ngAfterViewInit(): void {
+    this.pettyCashService.onDataChangedObservable$
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(result => {
+          this.loadListItem();
+        })
 
   }
   ngOnChanges(changes: SimpleChanges): void {
     
   }
   ngOnDestroy(): void {
-  
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 
   ngOnInit(): void {
+  }
+
+  loadListItem() {
+    this.pettyCashService.getListItemByemployee(1, 10, this.employeeId)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.user = res;
+        });
   }
 
 }

@@ -1,1 +1,31 @@
-<p>add-item works!</p>
+<div fxLayout="column" fxFlexFill class="dialog-container">
+    <mat-toolbar fxLayout="row" fxFlex="0 1 auto" fxLayoutAlign="start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <div fxFlex="1 0 auto">{{item?.value}}</div>
+            <div fxFlex="0 1 auto">
+                <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+                    <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-toolbar>
+    <form fxLayout="column" class="content" (ngSubmit)="onSubmit()">
+        <div fxFlex="1 0 auto" *ngFor="let control of formBase">
+            <app-formbase [form]="form" [control]="control"></app-formbase>
+        </div>
+        <div fxFlex="0 1 auto" fxLayoutAlign="center end" style="margin: 20px 0 20px 0;" fxLayout="row"
+            fxLayoutGap="10px">
+            <button class="slip" fxFlex="40" type="button" color="primary" name="slip" mat-raised-button
+                (click)="selectSlip.click()">
+                แนบสลิป
+                <input id="file-input" #selectSlip style="display: none;" type="file" (change)="selectedFile($event)"
+                    accept=".png,.jpg">
+            </button>
+        </div>
+        <a fxFlex="0 1 auto" fxLayoutAlign="center end" style="margin: 20px 0 20px 0;">
+            <button fxFlex="80" mat-raised-button color="primary" type="submit"
+                [disabled]="!form?.valid">ยืนยัน</button>
+        </a>
+
+    </form>
+</div>

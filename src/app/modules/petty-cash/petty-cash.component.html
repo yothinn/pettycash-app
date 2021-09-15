@@ -1,22 +1,73 @@
 <mat-drawer-container class="contact-container">
-    <mat-drawer fxLayout="column" class="contact-left-panel" mode="side" opened="true" position="start">
-        <div>
-            <app-employee-list ></app-employee-list>
-        </div>
-    </mat-drawer>
+  <mat-drawer fxLayout="column" class="contact-left-panel" mode="side" opened="true" position="start">
+    <div>
+      <button mat-menu-item (click)="openAddEmployeeDialog('')">
+        <mat-icon>person_add</mat-icon>
+        <span>เพิ่มข้อมูลผู้ใช้</span>
+      </button>
+    </div>
+    <div fxLayoutAlign="center" class="search">
+      <mat-form-field appearance="outline" class="field-search">
+        <mat-label>
+          <mat-icon>search</mat-icon>
+        </mat-label>
+        <input #searchContact matInput placeholder="Search...">
 
-    <mat-drawer-content class="contact-content-panel" fxLayout="column">
-        <mat-toolbar class="toolbar">
-            <!-- <span fxFlex="60">{{activeContact.title}} {{activeContact.firstName}} {{activeContact.lastName}}</span> -->
-            <div fxFlex="40" fxLayoutGap="10px" fxLayoutAlign="start center">
-              <button mat-flat-button name="btn-addnew-certs" color="primary"
-                (click)="onDialogAddItem('')">
-                เพิ่มรายการ
+        <button matSuffix *ngIf="isSearching" mat-icon-button (click)="cancelSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="scrol" #contactList>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option class="employee-list" *ngFor="let item of employeeList" (click)="chooseContact(item)">
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <a class="name">
+              {{ item.title + item.firstName}} {{item.lastName}}
+            </a>
+            <div fxLayoutAlign="end">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
               </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openAddEmployeeDialog(item)">
+                  <mat-icon>edit</mat-icon>
+                  <span>edit</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>delete</span>
+                </button>
+              </mat-menu>
             </div>
-          </mat-toolbar>
-                <app-petty-cash-table></app-petty-cash-table>
-        <router-outlet></router-outlet>
-    </mat-drawer-content>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <a class="size-amount">
+            </a>
+            <a class="limit">
+              <!-- วงเงิน {{item.financialAmount | number:"0.2"}} -->
+            </a>
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content class="contact-content-panel" fxLayout="column"  *ngIf="activeEmployee">
+    <mat-toolbar class="toolbar">
+      <!-- <span fxFlex="60">{{activeContact.title}} {{activeContact.firstName}} {{activeContact.lastName}}</span> -->
+      <div fxFlex="40" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <button mat-flat-button name="btn-addnew-certs" color="primary" (click)="onDialogAddItem('')">
+          เพิ่มรายการ
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <app-petty-cash-table [employeeId]="activeEmployee._id"></app-petty-cash-table>
+
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
 
 </mat-drawer-container>
