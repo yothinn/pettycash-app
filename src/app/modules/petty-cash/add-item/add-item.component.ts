@@ -45,28 +45,8 @@ export class AddItemComponent implements OnInit {
         console.log(layouts)
         this.item = layouts[0];
         this.formBase = this.item?.forms || [];
-
-        this.formBase.map(item => {
-          if ((item.key === 'created') ||
-            (item.key === 'deposit') || (item.key === 'withdraw')) {
-            item.disabled = ((this.data.isAdmin) || (this.data.isNew)) ? false : true;
-          }
-          return item;
-        });
-
         this.form = this.formBaseService.toFormGroup(this.formBase, this.data.info);
       });
-
-    console.log(this.data);
-    if (this.data.isNew) {
-      this.isNew = true;
-      this.imageUrl = null;
-    } else {
-      this.isNew = false;
-      this.imageUrl = this.data.info?.payInSlipUrl?.src || null;
-    }
-
-    this.isChangeImage = false;
   }
 
 
@@ -95,13 +75,12 @@ export class AddItemComponent implements OnInit {
 
   onSubmit(): void {
     let payload = this.form.getRawValue();
-    console.log(payload);
-    console.log(this.data.info._id);
+    console.log(payload)
 
     if (this.data.isNew) {
       payload.no = '';
       // console.log('create');  
-      payload['customerId'] = this.data.info.customerId;
+      payload['customerId'] = this.data.customerId;
       this.pettyCashService.createListItem(payload).subscribe((res: any) => {
         this.dialogRef.close(res);
       })

@@ -13,7 +13,7 @@ export class PettyCashService {
   constructor(private http: HttpClient,) { }
 
   getListItemByemployee(pageNo=1, size = 25, contactId:string): Observable<any> {
-    let apiUrl = `http://localhost:3001/api/pettycashs?customerId=${contactId}&pageNo=${pageNo}&size=${size}`;
+    let apiUrl = `http://localhost:3001/api/pettycashs?id=${contactId}&pageNo=${pageNo}&size=${size}`;
     return this.http.get(apiUrl);
   }
 

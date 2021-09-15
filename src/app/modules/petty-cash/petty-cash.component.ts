@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { PettyCashService } from 'src/app/services/petty-cash.service';
 import { AddEmployeeComponent } from '../employee/add-employee/add-employee.component';
 import { AddItemComponent } from './add-item/add-item.component';
 
@@ -35,6 +36,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   private _unsubscribeAll: Subject<any>;
 
   constructor(
+    private pettyCashService: PettyCashService,
     public dialog: MatDialog,
     private employeeService: EmployeeService,
     private ref: ChangeDetectorRef
@@ -136,6 +138,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   }
   chooseContact(employeeList): void {
     this.activeEmployee = employeeList;
+    this.pettyCashService.getListItemByemployee(1, 10, employeeList.id)
     console.log(this.activeEmployee)
 
     // this.loadTabData(this.currentTabIndex);
