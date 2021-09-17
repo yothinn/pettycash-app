@@ -10,12 +10,9 @@ export class PettyCashService {
   private onDataChanged$ = new BehaviorSubject<any>({});
   public onDataChangedObservable$ = this.onDataChanged$.asObservable();
 
-  private onGetDataChanged$ = new BehaviorSubject<any>({});
-  public onGetDataChangedObservable$ = this.onGetDataChanged$.asObservable();
-
   constructor(private http: HttpClient,) { }
 
-  getListItemByemployee(pageNo = 1, size = 25, employeetId: string): Observable<any> {
+  getListItemByemployee(pageNo = 1, size = 25, employeetId): Observable<any> {
     return this.http.get(`http://localhost:3001/api/pettycashs?query=${employeetId}&pageNo=${pageNo}&size=${size}`);
   }
 
