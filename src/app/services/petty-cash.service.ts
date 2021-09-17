@@ -10,19 +10,29 @@ export class PettyCashService {
   private onDataChanged$ = new BehaviorSubject<any>({});
   public onDataChangedObservable$ = this.onDataChanged$.asObservable();
 
+  private onGetDataChanged$ = new BehaviorSubject<any>({});
+  public onGetDataChangedObservable$ = this.onGetDataChanged$.asObservable();
+
   constructor(private http: HttpClient,) { }
 
-  getListItemByemployee(pageNo=1, size = 25, contactId:string): Observable<any> {
-    let apiUrl = `http://localhost:3001/api/pettycashs?id=${contactId}&pageNo=${pageNo}&size=${size}`;
-    return this.http.get(apiUrl);
+  getListItemByemployee(pageNo = 1, size = 25, employeetId: string): Observable<any> {
+    return this.http.get(`http://localhost:3001/api/pettycashs?query=${employeetId}&pageNo=${pageNo}&size=${size}`);
   }
+
 
   createListItem(body: any): Observable<any> {
     return this.http.post('http://localhost:3001/api/pettycashs', body)
-              .pipe(map((res: any) => {
-                this.onDataChanged$.next(res.data);
-                return res;
-              }));
+      .pipe(map((res: any) => {
+        this.onDataChanged$.next(res.data);
+        return res;
+      }));
+  }
+  updateListItem(id: string, body: any): Observable<any> {
+    return this.http.put(`http://localhost:3001/api/pettycashs/${id}`, body)
+      .pipe(map((result: any) => {
+        this.onDataChanged$.next(result.data);
+        return result;
+      }));
   }
 
 }

@@ -43,13 +43,6 @@
               </mat-menu>
             </div>
           </div>
-          <div fxLayout="row" fxLayoutAlign="space-between stretch">
-            <a class="size-amount">
-            </a>
-            <a class="limit">
-              <!-- วงเงิน {{item.financialAmount | number:"0.2"}} -->
-            </a>
-          </div>
         </mat-list-option>
       </mat-selection-list>
     </div>
@@ -57,7 +50,7 @@
 
   <mat-drawer-content class="contact-content-panel" fxLayout="column"  *ngIf="activeEmployee">
     <mat-toolbar class="toolbar">
-      <!-- <span fxFlex="60">{{activeContact.title}} {{activeContact.firstName}} {{activeContact.lastName}}</span> -->
+      <span fxFlex="60">{{activeEmployee.title}} {{activeEmployee.firstName}} {{activeEmployee.lastName}}</span>
       <div fxFlex="40" fxLayoutGap="10px" fxLayoutAlign="start center">
         <button mat-flat-button name="btn-addnew-certs" color="primary" (click)="onDialogAddItem('')">
           เพิ่มรายการ

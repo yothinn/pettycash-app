@@ -22,7 +22,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   currentPage = 1;
 
   // number of data that loaded
-  readonly PAGESIZE = 25;
+  readonly PAGESIZE = 5;
   // number of activity that showed
   readonly SHOWACNUM = 2;
 
@@ -136,34 +136,35 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     this.loadEmployee();
 
   }
-  chooseContact(employeeList): void {
-    this.activeEmployee = employeeList;
-    this.pettyCashService.getListItemByemployee(1, 10, employeeList.id)
-    console.log(this.activeEmployee)
+  chooseContact(data): void {
+    this.activeEmployee = data;
+    console.log(data)
 
     // this.loadTabData(this.currentTabIndex);
   }
 
   openAddEmployeeDialog(data): void {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: "400px",
+      width: "40vw",
+      height: "80vh",
       data: data
     });
   }
 
   onDialogAddItem(): void {
     const dialogRef = this.dialog.open(AddItemComponent, {
-      width: "400px",
+      width: "40vw",
       height: "80vh",
       data: {
         isNew: true,
         info: {
           created: new Date(Date.now()).toISOString(),
+          id: `${this.activeEmployee.id}`,
           customerId: this.activeEmployee._id,
           no: '---------- AUTO GEN ----------'
         }
       }
     });
-    dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe();
   }
 }

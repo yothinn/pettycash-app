@@ -15,8 +15,8 @@ export class EmployeeService {
   createEmployee(body: any): Observable<any>{
     return this.http.post('http://localhost:3000/api/employees',body);
   }
-  getEmployee(): Observable<any>{
-    return this.http.get('http://localhost:3000/api/employees')
+  getEmployee(id: string): Observable<any>{
+    return this.http.get(`http://localhost:3000/api/employees/${id}`)
   }
   getEmployees(pageNo = 1, size = 5): Observable<any>{
     return this.http.get(`http://localhost:3000/api/employees?pageNo=${pageNo}&size=${size}`)

@@ -4,7 +4,7 @@
             <div fxFlex="1 0 auto">{{item?.value}}</div>
             <div fxFlex="0 1 auto">
                 <button type="button" aria-label="Toggle sidenav" mat-icon-button>
-                    <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+                    <mat-icon aria-label="Side nav toggle icon" (click)="onClose()">close</mat-icon>
                 </button>
             </div>
         </div>

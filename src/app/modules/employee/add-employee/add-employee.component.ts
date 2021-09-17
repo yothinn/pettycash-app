@@ -38,7 +38,7 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
     this.formBaseService.layoutChangedObservable$
     .pipe(
       takeUntil(this._unsubscribeAll),
-      map(layouts => { return layouts.filter(layout => layout.key === 'employees') })
+      map(layouts => { return layouts.filter(layout => layout.key === 'employee') })
     )
     .subscribe((res) => {
       console.log(res)
@@ -57,12 +57,15 @@ export class AddEmployeeComponent implements OnInit,OnDestroy {
     console.log(payLoad);
 
     if (!this.data) {
-      console.log(payLoad);
+      payLoad.id = Utils.generateGUID();
+      payLoad.title = this.form.value.title;
       this.employeeService.createEmployee(payLoad).subscribe((res: any) => {
+        console.log(res)
         this.dialogRef.close(res);
       })
       
     } else {
+      payLoad.id = this.data.id;
       this.employeeService.updateEmployee(this.data._id,payLoad).subscribe(res=> {
         console.log(res);
         this.dialogRef.close(res);
