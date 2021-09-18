@@ -9,7 +9,7 @@
             </div>
         </div>
     </mat-toolbar>
-    <form fxLayout="column" class="content" (ngSubmit)="onSubmit()">
+    <form fxLayout="column" class="content" (ngSubmit)="onSubmit()" >
         <div fxFlex="1 0 auto" *ngFor="let control of formBase">
             <app-formbase [form]="form" [control]="control"></app-formbase>
         </div>

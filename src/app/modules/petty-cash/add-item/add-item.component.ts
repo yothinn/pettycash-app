@@ -17,7 +17,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class AddItemComponent implements OnInit {
   readonly UPLOADSUB_PAYIN = "payinslip";
-  
+
   item: any;
   formBase: Formbase<string>[] = [];
   form: FormGroup;
@@ -53,7 +53,7 @@ export class AddItemComponent implements OnInit {
         this.formBase = this.item?.forms || [];
         this.form = this.formBaseService.toFormGroup(this.formBase, this.data.info);
       });
-      console.log(this.data);
+    console.log(this.data);
     if (this.data.isNew) {
       this.isNew = true;
       this.imageUrl = null;
@@ -61,7 +61,7 @@ export class AddItemComponent implements OnInit {
       this.isNew = false;
       this.imageUrl = this.data.info?.payInSlipUrl?.src || null;
     }
-    
+
     this.isChangeImage = false;
   }
 
@@ -106,7 +106,7 @@ export class AddItemComponent implements OnInit {
       } else {
         delete$ = of({});
       }
-      
+
       const formData = new FormData();
       formData.append('file', this.imageFile);
 
@@ -115,7 +115,7 @@ export class AddItemComponent implements OnInit {
     } else {
       upload$ = of({});
       delete$ = of({});
-    }    
+    }
 
     forkJoin({
       delete: delete$,
@@ -140,43 +140,8 @@ export class AddItemComponent implements OnInit {
       }),
     ).subscribe(res => {
       console.log(res);
-      // Update shareholderId to contact
-      console.log(this.data.info.id)
-      if (!this.data.info.id) {
-        console.log('update shareholderId');
-        this.employeeService.getEmployee(this.data.info.id)
-            .pipe(
-              concatMap(employee => {
-                employee = employee.data;
-                console.log(employee);
-                employee['id'] = res.data.id;
-                return this.employeeService.updateEmployee(employee._id, employee);
-              })
-            )
-            .subscribe(res => {
-              console.log(res);
-              this.dialogRef.close(true);
-            })
-      } else {
-        this.dialogRef.close(true);
-      }
+      this.dialogRef.close(true);
     });
   }
-
-  // onChange(event) {
-  //   if (event.target.id === 'qty') {
-  //     // console.log(event.target.value);
-  //     let qty = parseInt(event.target.value);
-  //     this.form.get('amount').setValue(qty * 100);
-  //   }
-
-  //   if (event.target.id === 'amount') {
-  //     // console.log(event.target.value);
-  //     let amount = parseInt(event.target.value);
-  //     this.form.get('qty').setValue(amount / 100);
-  //   }  
-    
-  // }
-
 
 }

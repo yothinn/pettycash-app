@@ -159,7 +159,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
         isNew: true,
         info: {
           created: new Date(Date.now()).toISOString(),
-          id: `${this.activeEmployee.id}`,
           customerId: this.activeEmployee._id,
           no: '---------- AUTO GEN ----------'
         }
