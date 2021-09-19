@@ -50,7 +50,7 @@
 
   <mat-drawer-content class="contact-content-panel" fxLayout="column"  *ngIf="activeEmployee">
     <mat-toolbar class="toolbar">
-      <span fxFlex="60">{{activeEmployee.title}} {{activeEmployee.firstName}} {{activeEmployee.lastName}}</span>
+      <span fxFlex="60">{{activeEmployee.title + activeEmployee.firstName}} {{activeEmployee.lastName}}</span>
       <div fxFlex="40" fxLayoutGap="10px" fxLayoutAlign="start center">
         <button mat-flat-button name="btn-addnew-certs" color="primary" (click)="onDialogAddItem('')">
           เพิ่มรายการ

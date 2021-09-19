@@ -47,13 +47,16 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   ngOnInit(): void {
     this.loadEmployee();
   }
+
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
   ngAfterContentChecked(): void {
     this.ref.detectChanges();
   }
+
   ngAfterViewInit(): void {
     this.onSearchContactEvent()
     this.onScrollContactList();
@@ -77,13 +80,10 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
 
   onScrollContactList() {
     let scrollContact$ = fromEvent(this.employeeRef.nativeElement, 'scroll').pipe(
-      // tap(n => console.log(n)),
       debounceTime(300),
       filter((v: any) => {
         let maxPos = v.target.scrollHeight;
         let curPos = v.target.scrollTop + v.target.offsetHeight;
-
-        // console.log(`maxPos : ${maxPos} cusPos: ${curPos}` );
         return (curPos >= (maxPos - 10));
       })
     );
@@ -91,17 +91,14 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     scrollContact$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe((v: any) => {
         console.log(v);
-        // this.currentPage++;
-        // this.loadContacts();
         this.currentPage++;
         this.loadEmployee();
       });
   }
 
   onSearchContactEvent() {
-    // Search contact
     let typeahead = fromEvent(this.searchRef.nativeElement, 'input').pipe(
-      map((e:KeyboardEvent) => {
+      map((e: KeyboardEvent) => {
         this.isSearching = true;
         return (e.target as HTMLInputElement).value
       }),
@@ -114,33 +111,31 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     );
 
     typeahead.pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(
-              v => {
-                // TODO: update contact
-                console.log(v);
-                this.employeeList = v.data;
-              },
-              err => {
-                console.log('contact searching error');
-              }
-            );
+      .subscribe(
+        v => {
+          // TODO: update contact
+          console.log(v);
+          this.employeeList = v.data;
+        },
+        err => {
+          console.log('contact searching error');
+        }
+      );
   }
 
   cancelSearch(): void {
     console.log('cancel search');
     this.isSearching = false;
     this.searchRef.nativeElement.value = '';
-    // console.log(this.searchRef.nativeElement);
 
     // Reload contact
     this.loadEmployee();
 
   }
+
   chooseContact(data): void {
     this.activeEmployee = data;
     console.log(data)
-
-    // this.loadTabData(this.currentTabIndex);
   }
 
   openAddEmployeeDialog(data): void {
@@ -164,6 +159,5 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
         }
       }
     });
-    dialogRef.afterClosed().subscribe();
   }
 }

@@ -58,7 +58,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
     ],
     menus: [
-      "edit", "download"   
+      "edit", "download"
     ]
   };
   private _unsubscribeAll: Subject<any>;
@@ -68,22 +68,24 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     public dialog: MatDialog,
     private pettyCashService: PettyCashService,
     private auth: AuthService
-    ) {
+  ) {
     this._unsubscribeAll = new Subject();
-   }
+  }
+
   ngAfterViewInit(): void {
     this.pettyCashService.onDataChangedObservable$
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(res => {
-          this.loadListItem();
-        })
-
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(res => {
+        this.loadListItem();
+      })
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.employeeId)
     this.loadListItem()
-    
+
   }
+
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
@@ -91,23 +93,22 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   ngOnInit(): void {
     this.auth.authUserStateObservable$
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe((user) => {
-      this.user = user;
-    
-      console.log(this.user);
-    });
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((user) => {
+        this.user = user;
 
+        console.log(this.user);
+      });
   }
 
   loadListItem() {
     this.pettyCashService.getListItemByemployee(1, 10, this.employeeId)
-        .subscribe((res: any) => {
-          console.log(res)
-          this.employee = res;
-        });
-
+      .subscribe((res: any) => {
+        console.log(res)
+        this.employee = res;
+      });
   }
+
   onEditRow(row): void {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: "40vw",
@@ -119,17 +120,13 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         info: row
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.alertService.showSuccess('บันทึกข้อมูลสำเร็จ');
-        this.loadListItem();
-      }
+      this.loadListItem();
     })
   }
+
   onDownloadRow(row): void {
     console.log(row);
-    
     let fileName = row.no.replace("/", "_");
     window.open(`${environment.apiUrl}/shareholder/${fileName}.jpg`);
   }

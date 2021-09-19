@@ -65,14 +65,10 @@ export class AddItemComponent implements OnInit {
     this.isChangeImage = false;
   }
 
-
   selectedFile(event) {
     const file = event.target.files[0];
-    // console.log(files);
-
     let maxSize = environment.maxupload;         // size in MB
     let fileSize = file.size / 1024 / 1024            // convert to MB
-
     if (fileSize >= maxSize) {
       // TODO : how to manage error !!!!
       throw new Error(`File Size is too large. Allowed file size is ${maxSize}MB`);
@@ -88,6 +84,7 @@ export class AddItemComponent implements OnInit {
     };
     fileReader.readAsDataURL(file);
   }
+
   onClose() {
     this.dialogRef.close();
   }
@@ -143,5 +140,4 @@ export class AddItemComponent implements OnInit {
       this.dialogRef.close(true);
     });
   }
-
 }
