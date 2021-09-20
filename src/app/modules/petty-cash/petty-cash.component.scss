@@ -5,8 +5,7 @@
   
     .contact-left-panel {
       width: 20%;
-      // border: 1px solid red;
-      // height: calc(100vh - 65px);
+      height: calc(100vh - 50px);
   
       .mat-list-option {
         // color: $nav-font-color;
@@ -29,7 +28,7 @@
       overflow: auto;
       width: 85%;
       padding-left: 10px;
-      padding-right: 10px;
+      padding-right: 50px;
       // background-color: #fff;
       // border: 1px solid black;
   
@@ -59,9 +58,13 @@
   height: 15vh;
 }
 .scrol{
-  height: 71vh;
+  height: 73vh;
   overflow: auto !important;
 }
 .field-search{
   width: 95%;
+}
+.table{
+  overflow: auto;
+  height: 90vh;
 }
