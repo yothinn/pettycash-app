@@ -23,8 +23,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       "no",
       "created",
       "description",
-      "deposit",
-      "withdraw",
+      "amount",
       "placeOfUse",
       "menu"
     ],
@@ -43,13 +42,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         "value": "รายการ"
       },
       {
-        "key": "deposit",
-        "value": "เงินเข้า",
-        "controlType": "number"
-      },
-      {
-        "key": "withdraw",
-        "value": "เงินออก",
+        "key": "amount",
+        "value": "เงิน",
         "controlType": "number"
       },
       {
@@ -102,7 +96,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   loadListItem() {
-    this.pettyCashService.getListItemByemployee(1, 10, this.employeeId)
+    this.pettyCashService.getListItemByemployee(1, 25, this.employeeId)
       .subscribe((res: any) => {
         console.log(res)
         this.employee = res;

@@ -27,6 +27,8 @@ export class AddItemComponent implements OnInit {
   imageUrl: any;
   isNew: boolean;
 
+  status: Array<any> = [{ name: "เงินเข้า" }, { name: "เงินออก" }];
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -39,6 +41,7 @@ export class AddItemComponent implements OnInit {
     private uploadService: UploadService,
   ) {
     this._unsubscribeAll = new Subject();
+    
   }
 
   ngOnInit(): void {
@@ -52,6 +55,8 @@ export class AddItemComponent implements OnInit {
         this.item = layouts[0];
         this.formBase = this.item?.forms || [];
         this.form = this.formBaseService.toFormGroup(this.formBase, this.data.info);
+        this.form.addControl('status', this.fb.control(this.data?.status || ''));
+        this.form.addControl('amount', this.fb.control(this.data?.amount || ''));
       });
     console.log(this.data);
     if (this.data.isNew) {
