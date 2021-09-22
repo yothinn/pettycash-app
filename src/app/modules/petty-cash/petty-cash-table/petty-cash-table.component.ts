@@ -24,6 +24,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       "created",
       "description",
       "amount",
+      "status",
       "placeOfUse",
       "menu"
     ],
@@ -35,7 +36,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
       {
         "key": "no",
-        "value": "เลขที่เอกสาร"
+        "value": "เลขที่เอกสาร",
       },
       {
         "key": "description",
@@ -43,8 +44,12 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
       {
         "key": "amount",
-        "value": "เงิน",
+        "value": "จำนวนเงิน",
         "controlType": "number"
+      },
+      {
+        "key": "status",
+        "value": "สถานะ",
       },
       {
         "key": "placeOfUse",

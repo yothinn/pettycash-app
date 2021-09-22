@@ -1,6 +1,6 @@
 .contact-container {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 10vh);
     // border: 1px solid black;
   
     .contact-left-panel {
@@ -25,7 +25,6 @@
     }
   
     .contact-content-panel {
-      overflow: auto;
       width: 85%;
       padding-left: 10px;
       padding-right: 50px;
