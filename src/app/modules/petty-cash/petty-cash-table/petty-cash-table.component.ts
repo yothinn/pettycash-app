@@ -61,6 +61,9 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     ]
   };
   private _unsubscribeAll: Subject<any>;
+  totalAmountIn: number = 0;
+  totalAmountOut: number = 0;
+  totalResult: number = 0;
 
   constructor(
     private alertService: AlertService,
@@ -95,7 +98,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((user) => {
         this.user = user;
-
         console.log(this.user);
       });
   }
@@ -105,6 +107,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       .subscribe((res: any) => {
         console.log(res)
         this.employee = res;
+        this.findsum(this.employee);
       });
   }
 
@@ -130,4 +133,23 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     window.open(`${environment.apiUrl}/shareholder/${fileName}.jpg`);
   }
 
+  findsum(data) {
+    this.totalAmountIn = 0;
+    this.totalAmountOut = 0;
+    let sumIn = data.data.filter(res => {
+      return res.status === 'เงินเข้า'
+    })
+    let sumOut = data.data.filter(res => {
+      return res.status === 'เงินออก'
+    })
+    console.log(sumIn,sumOut)
+    if (sumOut.length === 0) {
+      sumIn.forEach(a => this.totalAmountIn += a.amount);
+      this.totalResult = this.totalAmountIn
+    } else {
+      sumIn.forEach(a => this.totalAmountIn += a.amount);
+      sumOut.forEach(a => this.totalAmountIn -= a.amount);
+      this.totalResult = this.totalAmountIn - this.totalAmountOut;
+    }
+  }
 }

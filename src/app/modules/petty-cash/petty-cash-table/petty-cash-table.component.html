@@ -1,4 +1,5 @@
 <div fxLayout="column" fxFlex="100">
+    <a [ngClass]="{negative: totalResult < 0}">{{totalResult | number}}</a>
     <app-tablebase [dataSource]="employee" [table]="table" (onEditRow)="onEditRow($event)"
         (onDownloadRow)="onDownloadRow($event)" >
     </app-tablebase>
