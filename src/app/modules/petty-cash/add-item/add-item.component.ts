@@ -16,7 +16,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
-  readonly UPLOADSUB_PAYIN = "payinslip";
+  readonly UPLOADSUB_PAYIN = "pettyCashs";
 
   item: any;
   formBase: Formbase<string>[] = [];
@@ -64,11 +64,26 @@ export class AddItemComponent implements OnInit {
       this.imageUrl = null;
     } else {
       this.isNew = false;
-      this.imageUrl = this.data.info?.payInSlipUrl?.src || null;
     }
 
     this.isChangeImage = false;
   }
+
+  // onFileUpload(event) {
+  //   const file = event.target.files[0];
+  //   this.imageFile = file;
+  //   const form = new FormData();
+  //   form.append('file', file);
+  //   this.imageFile = form;
+  //   console.log(this.imageFile);
+  //   this.uploadService.uploadFile('pettyCashs', form)
+  //     .subscribe((res) => {
+  //       this.imageFile = res;
+  //       this.imageUrl = res.src;
+  //       console.log(res);
+
+  //     })
+  // }
 
   selectedFile(event) {
     const file = event.target.files[0];
@@ -100,14 +115,7 @@ export class AddItemComponent implements OnInit {
     console.log(this.data.info._id);
 
     let upload$;
-    let delete$;
     if (this.isChangeImage) {
-
-      if (this.data.info.imageUrl) {
-        delete$ = this.uploadService.deleteFile('payinslip', this.data.info.imageUrl.name);
-      } else {
-        delete$ = of({});
-      }
 
       const formData = new FormData();
       formData.append('file', this.imageFile);
@@ -116,28 +124,18 @@ export class AddItemComponent implements OnInit {
       upload$ = this.uploadService.uploadFile(this.UPLOADSUB_PAYIN, formData);
     } else {
       upload$ = of({});
-      delete$ = of({});
     }
-
     forkJoin({
-      delete: delete$,
       upload: upload$
     }).pipe(
       takeUntil(this._unsubscribeAll),
       concatMap((result: any) => {
         console.log(result);
         if (this.data.isNew) {
-          payload.no = '';
           // console.log('create');  
           payload['id'] = this.data.info.customerId;
           payload['imageUrl'] = result.upload;
           return this.pettyCashService.createListItem(payload);
-        } else {
-          // console.log('update');
-          if (this.isChangeImage) {
-            payload['imageUrl'] = result.upload;
-          }
-          return this.pettyCashService.updateListItem(this.data.info._id, payload);
         }
       }),
     ).subscribe(res => {

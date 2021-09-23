@@ -1,6 +1,12 @@
 <div fxLayout="column" fxFlex="100">
-    <a [ngClass]="{negative: totalResult < 0}">{{totalResult | number}}</a>
-    <app-tablebase [dataSource]="employee" [table]="table" (onEditRow)="onEditRow($event)"
-        (onDownloadRow)="onDownloadRow($event)" >
-    </app-tablebase>
+    <div>
+        <mat-toolbar class="toolbar" fxLayoutAlign="end center">
+            <a class="total" [ngClass]="{negative: totalResult < 0}">{{totalResult | number: "0.2"}} ฿</a>
+        </mat-toolbar>
+    </div>
+    <div class="table">
+        <app-tablebase [dataSource]="employee" [table]="table" (onDownloadRow)="onDownloadRow($event)">
+        </app-tablebase>
+    </div>
+
 </div>

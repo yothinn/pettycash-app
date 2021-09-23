@@ -36,7 +36,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
       {
         "key": "no",
-        "value": "เลขที่เอกสาร",
+        "value": "เลขที่เอกสาร"
       },
       {
         "key": "description",
@@ -57,7 +57,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
     ],
     menus: [
-      "edit", "download"
+     "download"
     ]
   };
   private _unsubscribeAll: Subject<any>;
@@ -111,26 +111,25 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       });
   }
 
-  onEditRow(row): void {
-    const dialogRef = this.dialog.open(AddItemComponent, {
-      width: "40vw",
-      height: "80vh",
-      panelClass: 'custom-dialog-container',
-      data: {
-        isNew: false,
-        isAdmin: this.auth.isAdmin(this.user),
-        info: row
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadListItem();
-    })
-  }
+  // onEditRow(row): void {
+  //   const dialogRef = this.dialog.open(AddItemComponent, {
+  //     width: "40vw",
+  //     height: "80vh",
+  //     panelClass: 'custom-dialog-container',
+  //     data: {
+  //       isNew: false,
+  //       isAdmin: this.auth.isAdmin(this.user),
+  //       info: row
+  //     }
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadListItem();
+  //   })
+  // }
 
   onDownloadRow(row): void {
     console.log(row);
-    let fileName = row.no.replace("/", "_");
-    window.open(`${environment.apiUrl}/shareholder/${fileName}.jpg`);
+    window.open(`${environment.apiUrl}/api/${row.imageUrl.src}`);
   }
 
   findsum(data) {

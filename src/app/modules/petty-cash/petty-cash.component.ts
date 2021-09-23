@@ -155,7 +155,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
         info: {
           created: new Date(Date.now()).toISOString(),
           customerId: this.activeEmployee._id,
-          no: '---------- AUTO GEN ----------'
         }
       }
     });

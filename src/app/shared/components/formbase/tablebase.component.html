@@ -15,7 +15,7 @@
             <td mat-cell *matCellDef="let row" [ngSwitch]="item.controlType">
                <span *ngSwitchCase=""> {{row[item.key]}}</span>
                <span *ngSwitchCase="'datetime'" > {{row[item.key] | date:'dd/MM/yyyy'}}</span>
-               <span *ngSwitchCase="'number'" fxLayoutAlign="end" style="margin-right: 25px;"> {{row[item.key] | number:'1.0'}}</span>
+               <span *ngSwitchCase="'number'" fxLayoutAlign="end" style="margin-right: 25px;"> {{row[item.key] | number:'0.2'}}</span>
                <span *ngSwitchCase="'decimal'" fxLayoutAlign="end" style="margin-right: 25px;"> {{row[item.key] | number:'1.2'}}</span>
             </td>
             
