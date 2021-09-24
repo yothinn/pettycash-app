@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,6 +15,8 @@ import { AddItemComponent } from '../add-item/add-item.component';
 })
 export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() employeeId: string;
+  @Output() public totalResult: number = 0;
+
   user: any;
   employee: any;
 
@@ -63,7 +65,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   private _unsubscribeAll: Subject<any>;
   totalAmountIn: number = 0;
   totalAmountOut: number = 0;
-  totalResult: number = 0;
 
   deposit = 'เงินเข้า';
   withdraw = 'เงินออก';
@@ -132,7 +133,12 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   onDownloadRow(row): void {
     console.log(row);
-    window.open(`${environment.apiUrl}/api/${row.imageUrl.src}`);
+    if (row.imageUrl) {
+      window.open(`${environment.apiUrl}/api/${row.imageUrl.src}`);
+    } else {
+      alert('No Image');
+    }
+
   }
 
   findsum(data) {
@@ -149,10 +155,13 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
     console.log(sumIn, sumOut)
 
-    if (sumIn.length === 0) {
-      console.log('no data')
+    if (sumOut.length === 0) {
+      console.log('No Data')
 
-    } else {
+    }else if (sumIn.length === 0){
+      this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
+      
+    }else {
       this.totalAmountIn = sumIn.map(item => item.amount).reduce((prev, next) => prev + next);
       this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
     }
@@ -170,4 +179,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     //   this.totalResult = this.totalAmountIn - this.totalAmountOut;
     // }
   }
+
+
 }

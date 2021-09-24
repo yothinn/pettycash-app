@@ -16,7 +16,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
-  readonly UPLOADSUB_PAYIN = "pettyCashs";
+  readonly UPLOADSUB_PETTYCASH = "pettyCashs";
 
   item: any;
   formBase: Formbase<string>[] = [];
@@ -106,7 +106,7 @@ export class AddItemComponent implements OnInit {
       formData.append('file', this.imageFile);
 
       console.log(this.isChangeImage);
-      upload$ = this.uploadService.uploadFile(this.UPLOADSUB_PAYIN, formData);
+      upload$ = this.uploadService.uploadFile(this.UPLOADSUB_PETTYCASH, formData);
     } else {
       upload$ = of({});
     }
