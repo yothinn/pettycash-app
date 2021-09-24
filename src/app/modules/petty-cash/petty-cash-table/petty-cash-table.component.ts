@@ -57,13 +57,16 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
     ],
     menus: [
-     "download"
+      "download"
     ]
   };
   private _unsubscribeAll: Subject<any>;
   totalAmountIn: number = 0;
   totalAmountOut: number = 0;
   totalResult: number = 0;
+
+  deposit = 'เงินเข้า';
+  withdraw = 'เงินออก';
 
   constructor(
     private alertService: AlertService,
@@ -135,20 +138,36 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   findsum(data) {
     this.totalAmountIn = 0;
     this.totalAmountOut = 0;
+
     let sumIn = data.data.filter(res => {
-      return res.status === 'เงินเข้า'
+      return res.status === this.deposit;
     })
+
     let sumOut = data.data.filter(res => {
-      return res.status === 'เงินออก'
+      return res.status === this.withdraw;
     })
-    console.log(sumIn,sumOut)
-    if (sumOut.length === 0) {
-      sumIn.forEach(a => this.totalAmountIn += a.amount);
-      this.totalResult = this.totalAmountIn
+
+    console.log(sumIn, sumOut)
+
+    if (sumIn.length === 0) {
+      console.log('no data')
+
     } else {
-      sumIn.forEach(a => this.totalAmountIn += a.amount);
-      sumOut.forEach(a => this.totalAmountIn -= a.amount);
-      this.totalResult = this.totalAmountIn - this.totalAmountOut;
+      this.totalAmountIn = sumIn.map(item => item.amount).reduce((prev, next) => prev + next);
+      this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
     }
+
+    this.totalResult = this.totalAmountIn - this.totalAmountOut;
+
+
+
+    // if (sumOut.length === 0) {
+    //   sumIn.forEach(a => this.totalAmountIn += a.amount);
+    //   this.totalResult = this.totalAmountIn
+    // } else {
+    //   sumIn.forEach(a => this.totalAmountIn += a.amount);
+    //   sumOut.forEach(a => this.totalAmountIn -= a.amount);
+    //   this.totalResult = this.totalAmountIn - this.totalAmountOut;
+    // }
   }
 }

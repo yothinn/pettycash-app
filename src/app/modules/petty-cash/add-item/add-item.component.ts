@@ -69,21 +69,6 @@ export class AddItemComponent implements OnInit {
     this.isChangeImage = false;
   }
 
-  // onFileUpload(event) {
-  //   const file = event.target.files[0];
-  //   this.imageFile = file;
-  //   const form = new FormData();
-  //   form.append('file', file);
-  //   this.imageFile = form;
-  //   console.log(this.imageFile);
-  //   this.uploadService.uploadFile('pettyCashs', form)
-  //     .subscribe((res) => {
-  //       this.imageFile = res;
-  //       this.imageUrl = res.src;
-  //       console.log(res);
-
-  //     })
-  // }
 
   selectedFile(event) {
     const file = event.target.files[0];
