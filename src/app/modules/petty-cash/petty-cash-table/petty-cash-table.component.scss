@@ -2,10 +2,25 @@
     color: red;
 }
 .toolbar{
-    height: 5vh;
+    height: 7vh;
     background: white;
 }
 .table{
     overflow: auto;
-    height: 70vh;
+    height: 83vh;
+}
+.total{
+    margin-right: 10%;
+    font-size: 18px;
+}
+.dialogAddItem{
+    margin-right: 3%;
+}
+.net{
+    font-size: 23px;
+    margin-right: 2%;
+    color: rgb(88, 88, 88);
+}
+.fullName{
+    font-size: 25px;
 }

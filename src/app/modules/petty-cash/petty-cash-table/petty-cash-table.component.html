@@ -1,11 +1,18 @@
 <div fxLayout="column" fxFlex="100">
-    <div>
-        <mat-toolbar class="toolbar" fxLayoutAlign="end center">
-            <a class="total" [ngClass]="{negative: totalResult < 0}">{{totalResult | number: "0.2"}} ฿</a>
-        </mat-toolbar>
-    </div>
+    <mat-toolbar class="toolbar" fxLayoutAlign="space-between end">
+        <div>
+            <span class="fullName">{{data.title + data.firstName}} {{data.lastName}}</span>
+        </div>
+        <div class="dialogAddItem">
+            <a class="net"> สุทธิ</a>
+            <a class="total" [ngClass]="{negative: totalResult < 0}">{{totalResult | number: "0.2"}}</a>
+            <button mat-flat-button  color="primary" (click)="onDialogAddItem()">
+                เพิ่มรายการ
+            </button>
+        </div>
+    </mat-toolbar>
     <div class="table">
-        <app-tablebase [dataSource]="employee" [table]="table" (onDownloadRow)="onDownloadRow($event)" >
+        <app-tablebase [dataSource]="employee" [table]="table" (onDownloadRow)="onDownloadRow($event)">
         </app-tablebase>
     </div>
 

@@ -49,16 +49,8 @@
   </mat-drawer>
 
   <mat-drawer-content class="contact-content-panel" fxLayout="column"  *ngIf="activeEmployee">
-    <mat-toolbar class="toolbar" fxLayoutAlign="space-between center" >
-      <span>{{activeEmployee.title + activeEmployee.firstName}} {{activeEmployee.lastName}}</span>
-      <div>
-        <button mat-flat-button name="btn-addnew-certs" color="primary" (click)="onDialogAddItem('')">
-          เพิ่มรายการ
-        </button>
-      </div>
-    </mat-toolbar>
     <div>
-      <app-petty-cash-table [employeeId]="activeEmployee._id"></app-petty-cash-table>
+      <app-petty-cash-table [employeeId]="activeEmployee._id" [data]="activeEmployee"></app-petty-cash-table>
     </div>
     <router-outlet></router-outlet>
   </mat-drawer-content>

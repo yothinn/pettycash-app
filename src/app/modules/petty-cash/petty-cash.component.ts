@@ -146,17 +146,17 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     });
   }
 
-  onDialogAddItem(): void {
-    const dialogRef = this.dialog.open(AddItemComponent, {
-      width: "40vw",
-      height: "80vh",
-      data: {
-        isNew: true,
-        info: {
-          created: new Date(Date.now()).toISOString(),
-          customerId: this.activeEmployee._id,
-        }
-      }
-    });
-  }
+  // onDialogAddItem(): void {
+  //   const dialogRef = this.dialog.open(AddItemComponent, {
+  //     width: "40vw",
+  //     height: "80vh",
+  //     data: {
+  //       isNew: true,
+  //       info: {
+  //         created: new Date(Date.now()).toISOString(),
+  //         customerId: this.activeEmployee._id,
+  //       }
+  //     }
+  //   });
+  // }
 }

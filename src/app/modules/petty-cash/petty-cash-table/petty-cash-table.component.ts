@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +15,9 @@ import { AddItemComponent } from '../add-item/add-item.component';
 })
 export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() employeeId: string;
-  @Output() public totalResult: number = 0;
+  @Input() data: any;
+  
+  @Output() onTotalResult: EventEmitter<any> = new EventEmitter();
 
   user: any;
   employee: any;
@@ -62,9 +64,12 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       "download"
     ]
   };
+
   private _unsubscribeAll: Subject<any>;
+
   totalAmountIn: number = 0;
   totalAmountOut: number = 0;
+  totalResult: number = 0;
 
   deposit = 'เงินเข้า';
   withdraw = 'เงินออก';
@@ -160,25 +165,27 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
     }else if (sumIn.length === 0){
       this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
-      
+
     }else {
       this.totalAmountIn = sumIn.map(item => item.amount).reduce((prev, next) => prev + next);
       this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
     }
 
     this.totalResult = this.totalAmountIn - this.totalAmountOut;
-
-
-
-    // if (sumOut.length === 0) {
-    //   sumIn.forEach(a => this.totalAmountIn += a.amount);
-    //   this.totalResult = this.totalAmountIn
-    // } else {
-    //   sumIn.forEach(a => this.totalAmountIn += a.amount);
-    //   sumOut.forEach(a => this.totalAmountIn -= a.amount);
-    //   this.totalResult = this.totalAmountIn - this.totalAmountOut;
-    // }
   }
 
 
+  onDialogAddItem(): void {
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      width: "40vw",
+      height: "80vh",
+      data: {
+        isNew: true,
+        info: {
+          created: new Date(Date.now()).toISOString(),
+          customerId: this.data._id,
+        }
+      }
+    });
+  }
 }
