@@ -14,12 +14,13 @@
             <app-formbase [form]="form" [control]="control"></app-formbase>
         </div>
         <div>
-            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around" >
-                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name" [checked] = "item.name ==='เงินเข้า'">{{item.name}}
+            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around">
+                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name"
+                    [checked]="item.name ==='เงินเข้า'">{{item.name}}
                 </mat-radio-button>
             </mat-radio-group>
         </div>
-        <div *ngIf="status" >
+        <div *ngIf="status">
             <mat-form-field class="width" fxFlex>
                 <input matInput formControlName="amount" type="number" onfocus="this.value=''"
                     class="example-right-align" placeholder="จำนวนเงิน">
@@ -29,17 +30,13 @@
 
         <div fxFlex="0 1 auto" fxLayoutAlign="center end" style="margin: 20px 0 20px 0;" fxLayout="row"
             fxLayoutGap="10px">
-            <button class="slip" fxFlex="40" type="button" color="primary" name="slip" mat-raised-button
+            <button class="slip" type="button" color="primary" name="slip" mat-raised-button
                 (click)="selectSlip.click()">
                 แนบสลิป
                 <input id="file-input" #selectSlip style="display: none;" type="file" (change)="selectedFile($event)"
                     accept=".png,.jpg">
             </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form?.valid">ยืนยัน</button>
         </div>
-        <a fxFlex="0 1 auto" fxLayoutAlign="center end" style="margin: 20px 0 20px 0;">
-            <button fxFlex="80" mat-raised-button color="primary" type="submit"
-                [disabled]="!form?.valid">ยืนยัน</button>
-        </a>
-
     </form>
 </div>

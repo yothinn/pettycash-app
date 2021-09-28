@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AlertService } from 'src/app/alert.service';
@@ -16,7 +17,7 @@ import { AddItemComponent } from '../add-item/add-item.component';
 export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() employeeId: string;
   @Input() data: any;
-  
+
   @Output() onTotalResult: EventEmitter<any> = new EventEmitter();
 
   user: any;
@@ -71,6 +72,9 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   totalAmountOut: number = 0;
   totalResult: number = 0;
 
+  pageNo: any = 1;
+  pageSize: any = 10;
+
   deposit = 'เงินเข้า';
   withdraw = 'เงินออก';
 
@@ -78,7 +82,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     private alertService: AlertService,
     public dialog: MatDialog,
     private pettyCashService: PettyCashService,
-    private auth: AuthService
+    private auth: AuthService,
+    private spinner: NgxSpinnerService,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -112,13 +117,26 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   loadListItem() {
-    this.pettyCashService.getListItemByemployee(1, 25, this.employeeId)
+    this.pettyCashService.getListItemByemployee(this.pageNo, this.pageSize, this.employeeId)
       .subscribe((res: any) => {
         console.log(res)
         this.employee = res;
         this.findsum(this.employee);
       });
   }
+
+  // async loadData(): Promise<void>{
+  //   this.spinner.show();
+  //   try {
+  //     this.employeePage = await this.employee.excute(this.request);
+  //     this.employee.resetPage();
+  //   } catch (error) {
+
+  //   }finally {
+  //     this.spinner.hide();
+  //   }
+  //   this.spinner.hide();
+  // }
 
   // onEditRow(row): void {
   //   const dialogRef = this.dialog.open(AddItemComponent, {
@@ -143,7 +161,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     } else {
       alert('No Image');
     }
-
   }
 
   findsum(data) {
@@ -160,25 +177,21 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
     console.log(sumIn, sumOut)
 
-    if (sumOut.length === 0) {
-      console.log('No Data')
-
-    }else if (sumIn.length === 0){
-      this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
-
-    }else {
-      this.totalAmountIn = sumIn.map(item => item.amount).reduce((prev, next) => prev + next);
-      this.totalAmountOut = sumOut.map(item => item.amount).reduce((prev, next) => prev + next);
-    }
+    sumIn.map(item => {
+      this.totalAmountIn += item.amount;
+    });
+    sumOut.map(item => {
+      this.totalAmountOut += item.amount;
+    });
 
     this.totalResult = this.totalAmountIn - this.totalAmountOut;
+    console.log(this.totalResult);
   }
-
 
   onDialogAddItem(): void {
     const dialogRef = this.dialog.open(AddItemComponent, {
       width: "40vw",
-      height: "80vh",
+      height: "90vh",
       data: {
         isNew: true,
         info: {
@@ -187,5 +200,13 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         }
       }
     });
+  }
+
+  onPageEventChanged(event: any): void {
+    console.log(event);
+    this.pageNo = (event.pageIndex + 1);
+    this.pageSize = event.pageSize;
+
+    this.loadListItem();
   }
 }
