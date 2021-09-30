@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AlertService } from 'src/app/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PettyCashService } from 'src/app/services/petty-cash.service';
 import { environment } from 'src/environments/environment';
 import { AddItemComponent } from '../add-item/add-item.component';
+import { Pc } from '../pc';
+
 
 @Component({
   selector: 'app-petty-cash-table',
@@ -22,6 +22,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   user: any;
   employee: any;
+
+  data0: any;
 
   table: any = {
     displayedColumns: [
@@ -68,9 +70,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   private _unsubscribeAll: Subject<any>;
 
-  totalAmountIn: number = 0;
-  totalAmountOut: number = 0;
-  totalResult: number = 0;
+  sumData: number = 0;
 
   pageNo: any = 1;
   pageSize: any = 10;
@@ -79,15 +79,14 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   withdraw = 'เงินออก';
 
   constructor(
-    private alertService: AlertService,
     public dialog: MatDialog,
     private pettyCashService: PettyCashService,
     private auth: AuthService,
-    private spinner: NgxSpinnerService,
   ) {
+    this.data0 = new Pc();
     this._unsubscribeAll = new Subject();
-  }
 
+  }
   ngAfterViewInit(): void {
     this.pettyCashService.onDataChangedObservable$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -119,24 +118,12 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   loadListItem() {
     this.pettyCashService.getListItemByemployee(this.pageNo, this.pageSize, this.employeeId)
       .subscribe((res: any) => {
-        console.log(res)
         this.employee = res;
-        this.findsum(this.employee);
+        this.sumData = this.data0.findSum(res);
+        console.log(this.data0.totalResult);
       });
   }
 
-  // async loadData(): Promise<void>{
-  //   this.spinner.show();
-  //   try {
-  //     this.employeePage = await this.employee.excute(this.request);
-  //     this.employee.resetPage();
-  //   } catch (error) {
-
-  //   }finally {
-  //     this.spinner.hide();
-  //   }
-  //   this.spinner.hide();
-  // }
 
   // onEditRow(row): void {
   //   const dialogRef = this.dialog.open(AddItemComponent, {
@@ -163,30 +150,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  findsum(data) {
-    this.totalAmountIn = 0;
-    this.totalAmountOut = 0;
-
-    let sumIn = data.data.filter(res => {
-      return res.status === this.deposit;
-    })
-
-    let sumOut = data.data.filter(res => {
-      return res.status === this.withdraw;
-    })
-
-    console.log(sumIn, sumOut)
-
-    sumIn.map(item => {
-      this.totalAmountIn += item.amount;
-    });
-    sumOut.map(item => {
-      this.totalAmountOut += item.amount;
-    });
-
-    this.totalResult = this.totalAmountIn - this.totalAmountOut;
-    console.log(this.totalResult);
-  }
 
   onDialogAddItem(): void {
     const dialogRef = this.dialog.open(AddItemComponent, {
@@ -197,6 +160,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         info: {
           created: new Date(Date.now()).toISOString(),
           customerId: this.data._id,
+
         }
       }
     });
@@ -209,4 +173,5 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
     this.loadListItem();
   }
+
 }

@@ -5,7 +5,6 @@ import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, 
 import { EmployeeService } from 'src/app/services/employee.service';
 import { PettyCashService } from 'src/app/services/petty-cash.service';
 import { AddEmployeeComponent } from '../employee/add-employee/add-employee.component';
-import { AddItemComponent } from './add-item/add-item.component';
 
 @Component({
   selector: 'app-petty-cash',
@@ -27,11 +26,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   readonly SHOWACNUM = 2;
 
   isSearching: boolean = false;
-
-
-  // Dialog
-  contactDialog: any;
-  contactImportDialog: any;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -146,17 +140,5 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     });
   }
 
-  // onDialogAddItem(): void {
-  //   const dialogRef = this.dialog.open(AddItemComponent, {
-  //     width: "40vw",
-  //     height: "80vh",
-  //     data: {
-  //       isNew: true,
-  //       info: {
-  //         created: new Date(Date.now()).toISOString(),
-  //         customerId: this.activeEmployee._id,
-  //       }
-  //     }
-  //   });
-  // }
+  
 }

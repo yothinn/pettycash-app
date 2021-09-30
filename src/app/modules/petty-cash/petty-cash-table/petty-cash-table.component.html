@@ -5,7 +5,7 @@
         </div>
         <div class="dialogAddItem">
             <a class="net"> สุทธิ</a>
-            <a class="total" [ngClass]="{negative: totalResult < 0}">{{totalResult | number: "0.2"}}</a>
+            <a class="total" [ngClass]="{negative: sumData < 0}">{{sumData | number: "0.2"}}</a>
             <button mat-flat-button  color="primary" (click)="onDialogAddItem()">
                 เพิ่มรายการ
             </button>

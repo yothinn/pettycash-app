@@ -97,21 +97,22 @@ export class AddItemComponent implements OnInit {
   onSubmit(): void {
     let payload = this.form.getRawValue();
     console.log(payload);
-    console.log(this.data.info._id);
+    console.log(this.data.info.customerId);
 
     let upload$;
-    if (this.isChangeImage) {
 
+    if (this.isChangeImage) {
       const formData = new FormData();
       formData.append('file', this.imageFile);
-
       console.log(this.isChangeImage);
       upload$ = this.uploadService.uploadFile(this.UPLOADSUB_PETTYCASH, formData);
+
     } else {
       upload$ = of({});
     }
     forkJoin({
       upload: upload$
+      
     }).pipe(
       takeUntil(this._unsubscribeAll),
       concatMap((result: any) => {
