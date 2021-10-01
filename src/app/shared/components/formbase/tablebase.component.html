@@ -11,7 +11,7 @@
         </ng-container>
 
         <ng-container [matColumnDef]="item.key" *ngFor="let item of table.columns">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header">{{item.value}}</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{item.value}}</th>
             <td mat-cell *matCellDef="let row" [ngSwitch]="item.controlType">
                <span *ngSwitchCase=""> {{row[item.key]}}</span>
                <span *ngSwitchCase="'datetime'" > {{row[item.key] | date:'dd/MM/yyyy'}}</span>
@@ -23,7 +23,7 @@
 
         <!-- Menu Column -->
         <ng-container matColumnDef="menu">
-            <th mat-header-cell *matHeaderCellDef class="header">จัดการ</th>
+            <th mat-header-cell *matHeaderCellDef >จัดการ</th>
             <td mat-cell *matCellDef="let row" >
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
@@ -57,7 +57,7 @@
 
 </div>
 
-<div *ngIf="table && dataSource" class="pagin">
+<div *ngIf="table && dataSource">
     <mat-paginator #paginator [length]="dataSource.totalRecord || 0" [pageIndex]="0" [pageSize]="dataSource.pageSize || 10"
         [pageSizeOptions]="[10, 20, 50, 100]" (page)="pageEvent = onPageEvent($event)">
     </mat-paginator>

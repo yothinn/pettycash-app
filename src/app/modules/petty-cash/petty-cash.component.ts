@@ -129,7 +129,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
 
   chooseContact(data): void {
     this.activeEmployee = data;
-    console.log(data)
   }
 
   openAddEmployeeDialog(data): void {

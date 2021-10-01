@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PettyCashService } from 'src/app/services/petty-cash.service';
 import { environment } from 'src/environments/environment';
 import { AddItemComponent } from '../add-item/add-item.component';
-import { Pc } from '../pc';
+import { Pc } from '../table';
 
 
 @Component({
@@ -73,10 +73,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   sumData: number = 0;
 
   pageNo: any = 1;
-  pageSize: any = 10;
-
-  deposit = 'เงินเข้า';
-  withdraw = 'เงินออก';
+  pageSize: any = 10 ;
 
   constructor(
     public dialog: MatDialog,
@@ -96,7 +93,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.employeeId)
     this.loadListItem()
 
   }
@@ -107,20 +103,21 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnInit(): void {
-    this.auth.authUserStateObservable$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((user) => {
-        this.user = user;
-        console.log(this.user);
-      });
+    // this.auth.authUserStateObservable$
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe((user) => {
+    //     this.user = user;
+    //     console.log(this.user);
+    //   });
   }
 
   loadListItem() {
-    this.pettyCashService.getListItemByemployee(this.pageNo, this.pageSize, this.employeeId)
+    this.pettyCashService.getItemById(this.pageNo, this.pageSize, this.employeeId)
       .subscribe((res: any) => {
         this.employee = res;
-        this.sumData = this.data0.findSum(res);
-        console.log(this.data0.totalResult);
+        this.data0.tab = res;
+        console.log(this.data0.table)
+        this.sumData = this.data0.findSum();
       });
   }
 
@@ -167,7 +164,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   onPageEventChanged(event: any): void {
-    console.log(event);
     this.pageNo = (event.pageIndex + 1);
     this.pageSize = event.pageSize;
 

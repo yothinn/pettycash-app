@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Pc } from '../modules/petty-cash/pc';
+import { Pc } from '../modules/petty-cash/table';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class PettyCashService {
 
   constructor(private http: HttpClient,) { }
 
-  getListItemByemployee(pageNo = 1, size = 10, employeetId): Observable<Pc> {
+  getItemById(pageNo = 1 , size = 10, employeetId): Observable<Pc> {
     return this.http.get<Pc>(`http://localhost:3001/api/pettycashs?query=${employeetId}&pageNo=${pageNo}&size=${size}`)
     .pipe(map(result => {
         result.data = result.data.map(item => Object.assign(new Pc(), item) )

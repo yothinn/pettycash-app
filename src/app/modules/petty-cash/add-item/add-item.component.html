@@ -14,9 +14,9 @@
             <app-formbase [form]="form" [control]="control"></app-formbase>
         </div>
         <div>
-            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around">
-                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name"
-                    [checked]="item.name ==='เงินเข้า'">{{item.name}}
+            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around" >
+                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name" >
+                    {{item.name}}
                 </mat-radio-button>
             </mat-radio-group>
         </div>
