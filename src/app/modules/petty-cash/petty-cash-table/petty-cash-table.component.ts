@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PettyCashService } from 'src/app/services/petty-cash.service';
 import { environment } from 'src/environments/environment';
 import { AddItemComponent } from '../add-item/add-item.component';
-import { Pc } from '../table';
+import { PettyCash } from '../pettyCash';
 
 
 @Component({
@@ -23,15 +23,15 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   user: any;
   employee: any;
 
-  data0: any;
+  data0: any = [];
 
   table: any = {
     displayedColumns: [
       "no",
       "created",
       "description",
-      "amount",
-      "status",
+      "amountIn",
+      "amountOut",
       "placeOfUse",
       "menu"
     ],
@@ -50,13 +50,14 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         "value": "รายการ"
       },
       {
-        "key": "amount",
-        "value": "จำนวนเงิน",
+        "key": "amountIn",
+        "value": "เงินเข้า",
         "controlType": "number"
       },
       {
-        "key": "status",
-        "value": "สถานะ",
+        "key": 'amountOut',
+        "value": "เงินออก",
+        "controlType": "number"
       },
       {
         "key": "placeOfUse",
@@ -80,7 +81,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     private pettyCashService: PettyCashService,
     private auth: AuthService,
   ) {
-    this.data0 = new Pc();
+    this.data0 = new PettyCash();
     this._unsubscribeAll = new Subject();
 
   }
@@ -115,8 +116,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     this.pettyCashService.getItemById(this.pageNo, this.pageSize, this.employeeId)
       .subscribe((res: any) => {
         this.employee = res;
-        this.data0.tab = res;
-        console.log(this.data0.table)
+        this.data0.tab = res.data;
+        console.log(this.data0.sumData)
         this.sumData = this.data0.findSum();
       });
   }
