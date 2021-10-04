@@ -14,8 +14,8 @@
             <app-formbase [form]="form" [control]="control"></app-formbase>
         </div>
         <div>
-            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around" >
-                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name" >
+            <mat-radio-group class="margin-radio" formControlName="status" fxLayoutAlign="space-around">
+                <mat-radio-button *ngFor="let item of status" class="radio" [value]="item.name">
                     {{item.name}}
                 </mat-radio-button>
             </mat-radio-group>
@@ -38,5 +38,8 @@
             </button>
             <button mat-raised-button color="primary" type="submit" [disabled]="!form?.valid">ยืนยัน</button>
         </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="center" class="display-image">
+            <img fxLayoutAlign="center" *ngIf="imageUrl" [src]="displayImage()">
+        </div> -->
     </form>
 </div>

@@ -23,7 +23,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   user: any;
   employee: any;
 
-  data0: any = [];
+  data0: PettyCash;
 
   table: any = {
     displayedColumns: [
@@ -65,6 +65,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
       },
     ],
     menus: [
+      // "edit",
       "download"
     ]
   };
@@ -75,6 +76,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   pageNo: any = 1;
   pageSize: any = 10 ;
+
+  test: any [] ;
 
   constructor(
     public dialog: MatDialog,
@@ -113,11 +116,11 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   loadListItem() {
-    this.pettyCashService.getItemById(this.pageNo, this.pageSize, this.employeeId)
+    this.pettyCashService.getItemById(this.employeeId, this.pageNo, this.pageSize)
       .subscribe((res: any) => {
         this.employee = res;
+        console.log(this.employee);
         this.data0.tab = res.data;
-        console.log(this.data0.sumData)
         this.sumData = this.data0.findSum();
       });
   }
@@ -130,7 +133,6 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   //     panelClass: 'custom-dialog-container',
   //     data: {
   //       isNew: false,
-  //       isAdmin: this.auth.isAdmin(this.user),
   //       info: row
   //     }
   //   });
@@ -157,7 +159,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         isNew: true,
         info: {
           created: new Date(Date.now()).toISOString(),
-          customerId: this.data._id,
+          customerId: this.employeeId,
 
         }
       }

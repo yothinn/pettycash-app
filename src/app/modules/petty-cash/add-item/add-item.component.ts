@@ -41,7 +41,7 @@ export class AddItemComponent implements OnInit {
     private uploadService: UploadService,
   ) {
     this._unsubscribeAll = new Subject();
-    
+
   }
 
   ngOnInit(): void {
@@ -64,6 +64,7 @@ export class AddItemComponent implements OnInit {
       this.imageUrl = null;
     } else {
       this.isNew = false;
+      // this.imageUrl = this.data.info?.imageUrl?.src || null;
     }
 
     this.isChangeImage = false;
@@ -112,21 +113,34 @@ export class AddItemComponent implements OnInit {
     }
     forkJoin({
       upload: upload$
-      
+
     }).pipe(
       takeUntil(this._unsubscribeAll),
       concatMap((result: any) => {
         console.log(result);
         if (this.data.isNew) {
           // console.log('create');  
-          payload['id'] = this.data.info.customerId;
+          payload['employeeId'] = this.data.info.customerId;
           payload['imageUrl'] = result.upload;
           return this.pettyCashService.createListItem(payload);
-        }
+        } 
+        // else {
+        //   if (this.isChangeImage) {
+        //     payload['imageUrl'] = result.upload;
+        //   }
+        //   return this.pettyCashService.updateListItem(this.data.info._id, payload);
+        // }
       }),
     ).subscribe(res => {
       console.log(res);
       this.dialogRef.close(true);
     });
   }
+  // displayImage() {
+  //   if (this.isNew) {
+  //     return this.imageUrl;
+  //   } else {
+  //     return (this.isChangeImage) ? this.imageUrl : `${environment.apiUrl}/api/${this.imageUrl}`;
+  //   }
+  // }
 }
