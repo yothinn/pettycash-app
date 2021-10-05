@@ -13,8 +13,7 @@ export class PettyCashService {
 
   constructor(private http: HttpClient,) { }
 
-  getItemById( id: string, pageNo = 1, size = 10 ): Observable<PettyCash> {
-    console.log(id);
+  getItemById( id: string, pageNo, size ): Observable<PettyCash> {
     return this.http.get<PettyCash>(`http://localhost:3001/api/pettycashs?employeeId=${id}&pageNo=${pageNo}&size=${size}`)
     .pipe(map((result: any) => {
         result.data = result.data.map(item => Object.assign(new PettyCash(), item) )
@@ -31,12 +30,17 @@ export class PettyCashService {
         return res;
       }));
   }
-  updateListItem(id: string, body: any): Observable<any> {
-    return this.http.put(`http://localhost:3001/api/pettycashs/${id}`, body)
-      .pipe(map((result: any) => {
-        this.onDataChanged$.next(result.data);
-        return result;
-      }));
+
+  getTest(): Observable<PettyCash>{
+    return this.http.get<PettyCash>('http://localhost:3001/api/pettycashs/total')
+
   }
+  // updateListItem(id: string, body: any): Observable<any> {
+  //   return this.http.put(`http://localhost:3001/api/pettycashs/${id}`, body)
+  //     .pipe(map((result: any) => {
+  //       this.onDataChanged$.next(result.data);
+  //       return result;
+  //     }));
+  // }
 
 }

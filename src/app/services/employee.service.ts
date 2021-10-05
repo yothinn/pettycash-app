@@ -15,6 +15,10 @@ export class EmployeeService {
   createEmployee(body: any): Observable<any>{
     return this.http.post('http://localhost:3000/api/employees',body);
   }
+  deleteList(body): Observable<any> {
+    console.log(body)
+    return this.http.delete(`http://localhost:3000/api/employees/${body._id}`, body)
+  }
   getEmployee(id: string): Observable<any>{
     return this.http.get(`http://localhost:3000/api/employees/${id}`)
   }

@@ -136,11 +136,11 @@ export class AddItemComponent implements OnInit {
       this.dialogRef.close(true);
     });
   }
-  // displayImage() {
-  //   if (this.isNew) {
-  //     return this.imageUrl;
-  //   } else {
-  //     return (this.isChangeImage) ? this.imageUrl : `${environment.apiUrl}/api/${this.imageUrl}`;
-  //   }
-  // }
+  displayImage() {
+    if (this.isNew) {
+      return this.imageUrl;
+    } else {
+      return (this.isChangeImage) ? this.imageUrl : `${environment.apiUrl}/api/${this.imageUrl}`;
+    }
+  }
 }

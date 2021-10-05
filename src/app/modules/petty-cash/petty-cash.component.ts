@@ -17,7 +17,8 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   employeeList: Array<any>;
   activeEmployee: any;
 
-  currentTabIndex: number = 0;
+  test:any;
+
   currentPage = 1;
 
   // number of data that loaded
@@ -78,6 +79,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       filter((v: any) => {
         let maxPos = v.target.scrollHeight;
         let curPos = v.target.scrollTop + v.target.offsetHeight;
+        console.log(curPos);
         return (curPos >= (maxPos - 10));
       })
     );
@@ -138,6 +140,16 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       data: data
     });
   }
-
+  onDelete(item): void{
+    if (confirm("Are you sure to delete ")) {
+      this.employeeService.deleteList(item).subscribe(res => {
+        if (res) {
+          this.loadEmployee()
+        } else {
+          console.log("error");
+        }
+      });
+    }
+  }
   
 }

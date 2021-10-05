@@ -74,10 +74,10 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   sumData: number = 0;
 
-  pageNo: any = 1;
-  pageSize: any = 10 ;
+  pageNo: number = 1;
+  pageSize: number = 10;
 
-  test: any [] ;
+  test: any;
 
   constructor(
     public dialog: MatDialog,
@@ -113,16 +113,22 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     //     this.user = user;
     //     console.log(this.user);
     //   });
+
+
   }
 
   loadListItem() {
     this.pettyCashService.getItemById(this.employeeId, this.pageNo, this.pageSize)
       .subscribe((res: any) => {
         this.employee = res;
-        console.log(this.employee);
+        console.log(res);
         this.data0.tab = res.data;
         this.sumData = this.data0.findSum();
       });
+    this.pettyCashService.getTest().subscribe((res: any) => {
+      this.test = res;
+      console.log(this.test);
+    })
   }
 
 
