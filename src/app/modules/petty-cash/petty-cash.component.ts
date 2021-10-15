@@ -17,8 +17,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   employeeList: Array<any>;
   activeEmployee: any;
 
-  test:any;
-
   currentPage = 1;
 
   // number of data that loaded
@@ -41,6 +39,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
 
   ngOnInit(): void {
     this.loadEmployee();
+
   }
 
   ngOnDestroy(): void {
@@ -53,7 +52,7 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
   }
 
   ngAfterViewInit(): void {
-    this.onSearchContactEvent()
+    this.onSearchContactEvent();
     this.onScrollContactList();
   }
 
@@ -63,10 +62,12 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       .subscribe((res: any) => {
         if (this.currentPage === 1) {
           this.employeeList = res.data;
+          // console.log(this.employeeList)
         } else {
           //Reload contact and concat to old
           if (res.data.length > 0) {
             this.employeeList = this.employeeList.concat(res.data);
+            // console.log(this.employeeList)
           }
 
         }
@@ -79,7 +80,6 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       filter((v: any) => {
         let maxPos = v.target.scrollHeight;
         let curPos = v.target.scrollTop + v.target.offsetHeight;
-        console.log(curPos);
         return (curPos >= (maxPos - 10));
       })
     );
@@ -126,11 +126,11 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
 
     // Reload contact
     this.loadEmployee();
-
   }
 
-  chooseContact(data): void {
+  chooseContact(data) {
     this.activeEmployee = data;
+    console.log(this.activeEmployee._id);
   }
 
   openAddEmployeeDialog(data): void {
@@ -140,7 +140,8 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       data: data
     });
   }
-  onDelete(item): void{
+
+  onDelete(item): void {
     if (confirm("Are you sure to delete ")) {
       this.employeeService.deleteList(item).subscribe(res => {
         if (res) {
@@ -151,5 +152,5 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
       });
     }
   }
-  
+
 }

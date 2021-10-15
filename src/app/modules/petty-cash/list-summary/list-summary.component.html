@@ -1,0 +1,20 @@
+<div fxLayoutAlign="center">
+    <table class="table-summary">
+        <tr class="table-header">
+            <th>สถานะ</th>
+            <th>ยอดเงิน</th>
+        </tr>
+        <tr class="table-content">
+            <td>เงินเข้า</td>
+            <td class="display-number">{{sumIn | number: '0.2'}}</td>
+        </tr>
+        <tr class="table-content">
+            <td>เงินออก</td>
+            <td class="display-number">{{sumOut | number: '0.2'}}</td>
+        </tr>
+        <tr class="table-footer">
+            <td>ยอดคงเหลือ</td>
+            <td class="display-number">{{totalResult | number: '0.2'}}</td>
+        </tr>
+    </table>
+</div>

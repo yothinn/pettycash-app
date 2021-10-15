@@ -7,10 +7,11 @@ import { PettyCashTableComponent } from './petty-cash-table/petty-cash-table.com
 import { EmployeeModule } from 'src/app/modules/employee/employee.module';
 import { PettyCashRoutingModule } from './petty-cash-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ListSummaryComponent } from "./list-summary/list-summary.component";
 
 
 @NgModule({
-  declarations: [PettyCashComponent,AddItemComponent, PettyCashTableComponent],
+  declarations: [PettyCashComponent,AddItemComponent, PettyCashTableComponent,ListSummaryComponent],
   imports: [
     CommonModule,
     SharedModule,

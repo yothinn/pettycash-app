@@ -47,12 +47,20 @@
       </mat-selection-list>
     </div>
   </mat-drawer>
-
-  <mat-drawer-content class="contact-content-panel" fxLayout="column"  *ngIf="activeEmployee">
-    <div>
-      <app-petty-cash-table [employeeId]="activeEmployee._id" [data]="activeEmployee"></app-petty-cash-table>
-    </div>
+  <mat-drawer-content class="contact-content-panel" fxLayout="column" *ngIf="activeEmployee">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="สรุปรายการ">
+        <app-list-summary [testId]="activeEmployee._id"></app-list-summary>
+      </mat-tab>
+      <mat-tab label="เงินสดย่อย">
+        <div>
+          <app-petty-cash-table [employeeId]="activeEmployee._id" [data]="activeEmployee"></app-petty-cash-table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
     <router-outlet></router-outlet>
   </mat-drawer-content>
+
+
 
 </mat-drawer-container>

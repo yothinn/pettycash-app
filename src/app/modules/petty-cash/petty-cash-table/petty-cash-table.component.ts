@@ -18,12 +18,10 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   @Input() employeeId: string;
   @Input() data: any;
 
-  @Output() onTotalResult: EventEmitter<any> = new EventEmitter();
-
   user: any;
-  employee: any;
+  listItem: Array<any>;
 
-  data0: PettyCash;
+  pettyCashData: PettyCash;
 
   table: any = {
     displayedColumns: [
@@ -72,19 +70,23 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   private _unsubscribeAll: Subject<any>;
 
-  sumData: number = 0;
+  // sumData: number = 0;
 
   pageNo: number = 1;
   pageSize: number = 10;
 
   test: any;
 
+  totalAmountIn: number = 0;
+  totalAmountOut: number = 0;
+  totalResult: number;
+
   constructor(
     public dialog: MatDialog,
     private pettyCashService: PettyCashService,
     private auth: AuthService,
   ) {
-    this.data0 = new PettyCash();
+    this.pettyCashData = new PettyCash();
     this._unsubscribeAll = new Subject();
 
   }
@@ -97,8 +99,9 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.loadListItem()
-
+    // console.log(changes);
+    this.pageNo = 1;
+    this.loadListItem();
   }
 
   ngOnDestroy(): void {
@@ -107,30 +110,44 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnInit(): void {
-    // this.auth.authUserStateObservable$
-    //   .pipe(takeUntil(this._unsubscribeAll))
-    //   .subscribe((user) => {
-    //     this.user = user;
-    //     console.log(this.user);
-    //   });
-
-
   }
 
   loadListItem() {
     this.pettyCashService.getItemById(this.employeeId, this.pageNo, this.pageSize)
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((res: any) => {
-        this.employee = res;
-        console.log(res);
-        this.data0.tab = res.data;
-        this.sumData = this.data0.findSum();
+        this.listItem = res;
+        console.log(this.listItem);
       });
-    this.pettyCashService.getTest().subscribe((res: any) => {
-      this.test = res;
-      console.log(this.test);
-    })
+    this.pettyCashService.getTest()
+      .subscribe((res: any) => {
+        this.test = res.data;
+        // console.log(this.test);
+        this.onFindSum(res.data)
+      })
   }
 
+  // sum amountIn and amountOut
+  onFindSum(data) {
+    this.totalAmountIn = 0;
+    this.totalAmountOut = 0;
+
+    let sumIn = data.amountIn.find(i => i._id === this.employeeId);
+    if (sumIn) {
+      this.totalAmountIn = sumIn.total;
+    } else {
+      null
+    }
+
+    let sumOut = data.amountOut.find(i => i._id === this.employeeId);
+    if (sumOut) {
+      this.totalAmountOut = sumOut.total;
+    } else {
+      null
+    }
+
+    this.totalResult = this.totalAmountIn - this.totalAmountOut;
+  }
 
   // onEditRow(row): void {
   //   const dialogRef = this.dialog.open(AddItemComponent, {
@@ -147,6 +164,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   //   })
   // }
 
+  // show image on blank tab
   onDownloadRow(row): void {
     console.log(row);
     if (row.imageUrl) {
@@ -173,10 +191,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   onPageEventChanged(event: any): void {
-    this.pageNo = (event.pageIndex + 1);
+    this.pageNo = event.pageIndex + 1;
     this.pageSize = event.pageSize;
-
     this.loadListItem();
   }
-
 }

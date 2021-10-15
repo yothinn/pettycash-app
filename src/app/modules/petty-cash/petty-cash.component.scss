@@ -5,7 +5,7 @@
   
     .contact-left-panel {
       width: 20%;
-      height: calc(100vh - 50px);
+      height: calc(100vh - 40px);
   
       .mat-list-option {
         // color: $nav-font-color;
@@ -60,4 +60,17 @@
 }
 .field-search{
   width: 95%;
+}
+.card{
+  height: 7vh;
+}
+.person-icon{
+  margin-top: 2px;
+}
+.header-person{
+  margin-top: 2px;
+  margin-right: 10px;
+}
+.menu{
+  margin-bottom: 6px;
 }

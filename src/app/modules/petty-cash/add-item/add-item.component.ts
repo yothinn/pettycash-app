@@ -25,6 +25,7 @@ export class AddItemComponent implements OnInit {
   isChangeImage: boolean;
   imageFile: any;
   imageUrl: any;
+  image: any;
   isNew: boolean;
 
   status: Array<any> = [{ name: "เงินเข้า" }, { name: "เงินออก" }];
@@ -33,7 +34,6 @@ export class AddItemComponent implements OnInit {
 
   constructor(
     private pettyCashService: PettyCashService,
-    private employeeService: EmployeeService,
     private formBaseService: FormbaseService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AddItemComponent>,
@@ -48,13 +48,15 @@ export class AddItemComponent implements OnInit {
     this.formBaseService.layoutChangedObservable$
       .pipe(
         takeUntil(this._unsubscribeAll),
-        map(layouts => { return layouts.filter(layout => layout.key === 'ListItem') })
+        map(layouts => { return layouts.filter(layout => layout.key === 'ListItem') }) //get field in cloude
       )
       .subscribe((layouts) => {
         console.log(layouts)
         this.item = layouts[0];
         this.formBase = this.item?.forms || [];
+        
         this.form = this.formBaseService.toFormGroup(this.formBase, this.data.info);
+
         this.form.addControl('status', this.fb.control(this.data?.status || ''));
         this.form.addControl('amount', this.fb.control(this.data?.amount || ''));
       });
@@ -86,7 +88,7 @@ export class AddItemComponent implements OnInit {
     let fileReader = new FileReader();
     fileReader.onload = (event) => {
       this.imageUrl = fileReader.result;
-      console.log(this.imageUrl);
+      console.log(this.image);
     };
     fileReader.readAsDataURL(file);
   }

@@ -1,0 +1,29 @@
+.table-summary {
+    width: 80%;
+    margin-top: 1.5em;
+    // border: 1px solid black;
+    
+
+    .table-header {
+        background-color: rgb(99, 99, 99);
+        font-size: 1.5em;
+        color: rgb(255, 255, 255);
+    }
+
+    .table-content td {
+        padding: 1em;
+        background-color: rgb(226, 226, 226);
+        //border: 1px solid black;
+    }
+
+    .table-footer td {
+        color: white;
+        padding: 0.5em;
+        background-color: rgb(146, 146, 146);
+        font-size: 1.2em;
+    }
+
+    .display-number {
+        text-align: right;
+    }
+}
