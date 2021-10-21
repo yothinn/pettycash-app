@@ -16,6 +16,7 @@ export class PettyCashService {
   getItemById(employeeId: string, pageNo, size ): Observable<PettyCash> {
     return this.http.get<PettyCash>(`http://localhost:3001/api/pettycashs?employeeId=${employeeId}&pageNo=${pageNo}&size=${size}`)
       .pipe(map((result: any) => {
+        console.log(result);
         result.data = result.data.map(item => Object.assign(new PettyCash(), item))
         return result;
       })

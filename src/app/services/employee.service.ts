@@ -35,4 +35,8 @@ export class EmployeeService {
   searchEmployee(firstName): Observable<any>{
     return this.http.get(`http://localhost:3000/api/employees?query=${firstName}`);
   }
+  uploadfile(file): Observable<any>{
+    console.log(file);
+    return this.http.post('http://localhost:3000/api/employees/uploads', file);
+  }
 }

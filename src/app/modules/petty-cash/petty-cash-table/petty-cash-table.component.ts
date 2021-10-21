@@ -72,8 +72,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   // sumData: number = 0;
 
-  pageNo: number = 1;
-  pageSize: number = 10;
+  pageNo = 1;
+  pageSize = 10;
 
   test: any;
 
@@ -101,6 +101,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
     this.pageNo = 1;
+    this.pageSize = 10;
     this.loadListItem();
   }
 

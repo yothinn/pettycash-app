@@ -4,6 +4,7 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { PettyCashService } from 'src/app/services/petty-cash.service';
+import { Utils } from 'src/app/shared/utils';
 import { AddEmployeeComponent } from '../employee/add-employee/add-employee.component';
 
 @Component({
@@ -67,9 +68,8 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
           //Reload contact and concat to old
           if (res.data.length > 0) {
             this.employeeList = this.employeeList.concat(res.data);
-            // console.log(this.employeeList)
+            console.log(this.employeeList)
           }
-
         }
       });
   }
@@ -87,8 +87,8 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     scrollContact$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe((v: any) => {
         console.log(v);
-        this.currentPage++;
-        this.loadEmployee();
+          this.currentPage++;
+          this.loadEmployee();
       });
   }
 
@@ -125,12 +125,28 @@ export class PettyCashComponent implements OnInit, OnDestroy, AfterContentChecke
     this.searchRef.nativeElement.value = '';
 
     // Reload contact
+    this.currentPage = 1;
     this.loadEmployee();
   }
 
   chooseContact(data) {
     this.activeEmployee = data;
     console.log(this.activeEmployee._id);
+  }
+
+  importExcel(event) {
+    const file = event.target.files[0];
+    console.log(file);
+    const form = new FormData();
+    form.append('file', file);
+    console.log(form);
+
+    this.employeeService.uploadfile(form)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.currentPage = 1;
+        this.loadEmployee();
+      })
   }
 
   openAddEmployeeDialog(data): void {

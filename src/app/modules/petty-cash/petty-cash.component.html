@@ -1,9 +1,13 @@
 <mat-drawer-container class="contact-container">
   <mat-drawer fxLayout="column" class="contact-left-panel" mode="side" opened="true" position="start">
     <div>
-      <button mat-menu-item (click)="openAddEmployeeDialog('')">
+      <button class="add" mat-raised-button type="button" (click)="openAddEmployeeDialog('')">
         <mat-icon>person_add</mat-icon>
         <span>เพิ่มข้อมูลผู้ใช้</span>
+      </button>
+      <button class="import" type="button"  name="file" mat-raised-button (click)="selectFile.click()">
+        +import file
+        <input id="file-input" #selectFile style="display: none;" type="file" (change)="importExcel($event)">
       </button>
     </div>
     <div fxLayoutAlign="center" class="search">
