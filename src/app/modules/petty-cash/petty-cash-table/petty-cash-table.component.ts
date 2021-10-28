@@ -25,7 +25,7 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
 
   table: any = {
     displayedColumns: [
-      "no",
+      "newId",
       "created",
       "description",
       "amountIn",
@@ -40,8 +40,8 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
         "controlType": "datetime"
       },
       {
-        "key": "no",
-        "value": "เลขที่เอกสาร"
+        "key": "newId",
+        "value": "เลขที่เอกสาร",
       },
       {
         "key": "description",
@@ -196,4 +196,19 @@ export class PettyCashTableComponent implements OnInit, AfterViewInit, OnChanges
     this.pageSize = event.pageSize;
     this.loadListItem();
   }
+
+  // importExcel(event) {
+  //   const file = event.target.files[0];
+  //   console.log(file);
+  //   const form = new FormData();
+  //   form.append('files', file);
+  //   console.log(form);
+
+  //   this.pettyCashService.uploadfile(form)
+  //     .subscribe((res: any) => {
+  //       console.log(res);
+  //       this.loadListItem();
+  //     })
+  // }
+
 }

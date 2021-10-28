@@ -6,7 +6,8 @@
         <span>เพิ่มข้อมูลผู้ใช้</span>
       </button>
       <button class="import" type="button"  name="file" mat-raised-button (click)="selectFile.click()">
-        +import file
+        <mat-icon>library_add</mat-icon>
+        นำเข้า
         <input id="file-input" #selectFile style="display: none;" type="file" (change)="importExcel($event)">
       </button>
     </div>

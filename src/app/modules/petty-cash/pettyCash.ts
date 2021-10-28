@@ -2,20 +2,19 @@ export class PettyCash {
   public status: string;
   public amount: number;
   public employeeId: string;
+  public no: number;
   // private sumIn: any;
   // private sumOut: any;
-  public sumData: any;
-  public testIn: any;
-  public testOut: any;
+  // public sumData: any;
+  // public testIn: any;
+  // public testOut: any;
   // public sumIn: any;
   // public sumOut: any;
   // public a: any [];
   // public b: any;
   // private totalAmountIn: number;
   // private totalAmountOut: number;
-  public totalResult: number;
-  public a: any;
-  public b: any;
+  // public totalResult: number;
 
 
 
@@ -38,6 +37,10 @@ export class PettyCash {
     }
   }
 
+  get newId(): number {
+    return this.no 
+
+  }
 
   // get net(): number {
   //   return this.testIn.total

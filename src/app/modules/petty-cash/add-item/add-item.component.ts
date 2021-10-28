@@ -100,7 +100,7 @@ export class AddItemComponent implements OnInit {
   onSubmit(): void {
     let payload = this.form.getRawValue();
     console.log(payload);
-    console.log(this.data.info.customerId);
+    // console.log(this.data.info.customerId);
 
     let upload$;
 

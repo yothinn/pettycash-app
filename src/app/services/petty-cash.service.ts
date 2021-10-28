@@ -43,4 +43,11 @@ export class PettyCashService {
   //     }));
   // }
 
+  // uploadfile(file): Observable<any>{
+  //   return this.http.post('http://localhost:3001/api/pettycashs/uploads', file)
+  //   .pipe(map((res: any) => {
+  //     this.onDataChanged$.next(res.data);
+  //     return res;
+  //   }));
+  // }
 }

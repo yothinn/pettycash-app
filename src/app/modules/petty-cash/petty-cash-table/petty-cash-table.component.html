@@ -6,14 +6,20 @@
         <div class="dialogAddItem">
             <a class="net"> สุทธิ</a>
             <a class="total" [ngClass]="{negative: totalResult < 0}">{{totalResult | number: "0.2"}}</a>
-            <button mat-flat-button  color="primary" (click)="onDialogAddItem()">
+            <button class="add" mat-flat-button color="primary" (click)="onDialogAddItem()">
+                <mat-icon>add</mat-icon>
                 เพิ่มรายการ
             </button>
+            <!-- <button type="button" name="file" color="primary" mat-flat-button (click)="selectFile.click()">
+                <mat-icon>library_add</mat-icon>
+                นำเข้า
+                <input id="file-input" #selectFile style="display: none;" type="file" (change)="importExcel($event)">
+            </button> -->
         </div>
     </mat-toolbar>
     <div class="table">
         <app-tablebase [dataSource]="listItem" [table]="table" (onDownloadRow)="onDownloadRow($event)"
-        (onPageEventChanged) = "onPageEventChanged($event)"  >
+            (onPageEventChanged)="onPageEventChanged($event)">
         </app-tablebase>
     </div>
 
